@@ -1,0 +1,2824 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Session 6A - Survey Research</title>
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["$$", "$$"]] }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f8fc;
+        --card: #ffffff;
+        --text: #1c1f24;
+        --muted: #5d6473;
+        --border: #e3e7f1;
+        --accent: #2b6de9;
+        --accent-2: #1f4fb1;
+        --success: #1c7c54;
+        --warning: #d97706;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.6;
+        padding-top: 70px;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--accent-2);
+        text-decoration: underline;
+      }
+
+      header {
+        background: linear-gradient(135deg, #eaf0ff, #ffffff);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .container {
+        max-width: min(1320px, 96vw);
+        margin: 0 auto;
+        padding: 24px 20px 60px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 12px;
+        padding: 28px 0 18px;
+      }
+
+      .breadcrumbs {
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: 32px;
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 920px;
+      }
+
+      .section {
+        margin-top: 28px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 12px 24px rgba(24, 34, 72, 0.06);
+      }
+
+      .card h3 {
+        margin-top: 0;
+      }
+
+      .grid-2 {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .tag {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .pill {
+        display: inline-block;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 12px;
+        color: var(--muted);
+        background: #f2f4fa;
+      }
+
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 56px;
+        background: #ffffff;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 0 16px;
+        z-index: 1000;
+      }
+
+      .topbar-link {
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .topbar-progress {
+        flex: 1;
+        display: grid;
+        gap: 4px;
+      }
+
+      .progress-track {
+        height: 6px;
+        background: #e5e7eb;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: var(--accent);
+        transition: width 0.2s ease;
+      }
+
+      .progress-text {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .settings-panel {
+        position: fixed;
+        top: 64px;
+        right: 16px;
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 12px;
+        box-shadow: 0 10px 24px rgba(24, 34, 72, 0.12);
+        z-index: 1001;
+        display: none;
+      }
+
+      .settings-panel.open {
+        display: grid;
+        gap: 8px;
+      }
+
+      .settings-title {
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      .controls {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .control-row {
+        display: grid;
+        gap: 6px;
+      }
+
+      label {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      input[type="range"],
+      input[type="number"],
+      select,
+      textarea {
+        width: 100%;
+      }
+
+      .btn {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .btn.secondary {
+        background: #e9eefc;
+        color: var(--accent-2);
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .stats {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        margin-top: 12px;
+      }
+
+      .stat {
+        background: #f5f7ff;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 13px;
+      }
+
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      canvas {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #fbfcff;
+      }
+
+      .quiz {
+        display: grid;
+        gap: 10px;
+      }
+
+      .quiz label {
+        font-size: 14px;
+        color: var(--text);
+      }
+
+      .feedback {
+        font-size: 13px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: #f5f7ff;
+        color: var(--muted);
+      }
+
+      .feedback.correct {
+        background: #e7f6ee;
+        color: var(--success);
+      }
+
+      .feedback.wrong {
+        background: #fff4e5;
+        color: var(--warning);
+      }
+
+      .bench {
+        display: grid;
+        gap: 12px;
+      }
+
+      .bench textarea {
+        min-height: 180px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .bench-output {
+        display: grid;
+        gap: 12px;
+      }
+
+      pre {
+        margin: 0;
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 12px;
+        border-radius: 12px;
+        min-height: 140px;
+        overflow-x: auto;
+        font-size: 12px;
+      }
+
+      ul {
+        margin: 0 0 0 18px;
+      }
+
+      .callout {
+        border-left: 4px solid #9bb8ff;
+        padding-left: 12px;
+        color: var(--muted);
+      }
+
+      .topic-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .topic-card {
+        background: #fdfdff;
+        border: 1px dashed #d8e1f6;
+        border-radius: 12px;
+        padding: 14px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .topic-card h4 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .card-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: minmax(320px, 1.15fr) 2.15fr;
+        align-items: start;
+      }
+
+      .card-left {
+        display: grid;
+        gap: 8px;
+      }
+
+      .card-right {
+        display: grid;
+        gap: 12px;
+      }
+
+      /* In single-card view, let theory and practice scroll independently. */
+      .view-mode-single .card-left,
+      .view-mode-single .card-right {
+        max-height: var(--split-pane-height, 70vh);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-gutter: stable;
+        padding-right: 6px;
+      }
+
+      /* In all-cards view, keep theory visible while the page scrolls. */
+      @media (min-width: 901px) {
+        .view-mode-all .topic-card .card-left {
+          position: sticky;
+          top: 72px;
+        }
+      }
+
+      .theory {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .exercise-intro {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      footer {
+        margin-top: 32px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 900px) {
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .topic-card ul {
+        margin: 0 0 0 18px;
+      }
+
+      .topic-figure {
+        margin-top: 6px;
+        background: #f5f7ff;
+        border: 1px solid #e1e7f8;
+        border-radius: 10px;
+        padding: 8px;
+        display: grid;
+        justify-items: center;
+      }
+
+      .topic-figure svg {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .topic-note {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .scale-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .scale-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 10px;
+        display: grid;
+        gap: 6px;
+      }
+
+      .scale-title {
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .scale-card label {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .thermo {
+        display: grid;
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .thermo-track {
+        height: 14px;
+        background: #e5e7eb;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .thermo-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #ef4444, #f59e0b, #22c55e);
+        transition: width 0.2s ease;
+      }
+
+      .thermo-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .mini-check {
+        display: grid;
+        gap: 6px;
+        margin-top: 8px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #e1e7f8;
+        background: #f6f8ff;
+      }
+
+      .mini-check label {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .mini-check select {
+        padding: 6px 8px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: #fff;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <a class="topbar-link" href="index.html">All modules</a>
+      <div class="topbar-progress">
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <div class="progress-text" id="progress-text">Cards</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn secondary" id="prev-card" type="button">Prev</button>
+        <button class="btn secondary" id="next-card" type="button">Next</button>
+        <button class="btn" id="settings-btn" type="button">Settings</button>
+      </div>
+    </div>
+    <div class="settings-panel" id="settings-panel">
+      <div class="settings-title">View settings</div>
+      <label><input type="radio" name="view-mode" value="all"> Show all cards</label>
+      <label><input type="radio" name="view-mode" value="single"> Card-by-card</label>
+    </div>
+    <header>
+      <div class="container hero">
+        <div class="breadcrumbs"><a href="index.html">All modules</a> / Session 6A</div>
+        <span class="tag">RDM Quantitative Track</span>
+        <h1>Survey Research</h1>
+        <p>
+          Survey design, sampling, reliability, and validity are essential for measuring
+          latent constructs. This module gives you practical tools to build and evaluate surveys.
+        </p>
+        <div class="pill">Session 6A - 12 Mar 2024</div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section card">
+        <h3>Learning goals</h3>
+        <ul>
+          <li>Compare probabilistic and non-probabilistic sampling.</li>
+          <li>Understand reliability and validity in survey measurement.</li>
+          <li>Compute Cronbach alpha and interpret internal consistency.</li>
+          <li>Use exploratory and confirmatory factor analysis to assess scales.</li>
+          <li>Recognize common survey biases and how to mitigate them.</li>
+        </ul>
+      </section>
+
+      <section class="section card">
+        <h3>Syllabus walkthrough (slide order)</h3>
+        <p class="small">Topics follow the slide sequence 1:1.</p>
+        <ol class="topic-list">
+          <li class="topic-card">
+            <h4>1. Observed responses map to a latent construct</h4>
+            <p class="small">
+              Three Subjective Happiness Scale (SHS) items are scored from 1-7.
+              The latent score is the mean of the three items.
+            </p>
+            <div class="scale-grid">
+              <div class="scale-card">
+                <div class="scale-title">Item 1: In general, I consider myself a very happy person.</div>
+                <label>Response (1-7)</label>
+                <input id="latent-q1" type="range" min="1" max="7" step="1" value="5">
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">Item 2: Compared to most of my peers, I am happier.</div>
+                <label>Response (1-7)</label>
+                <input id="latent-q2" type="range" min="1" max="7" step="1" value="4">
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">Item 3: I am generally a happy person.</div>
+                <label>Response (1-7)</label>
+                <input id="latent-q3" type="range" min="1" max="7" step="1" value="6">
+              </div>
+            </div>
+            <canvas id="latent-canvas" width="820" height="240" aria-label="Observed items and latent score"></canvas>
+            <div class="stats">
+              <div class="stat">Item 1: <span id="latent-q1-val">-</span></div>
+              <div class="stat">Item 2: <span id="latent-q2-val">-</span></div>
+              <div class="stat">Item 3: <span id="latent-q3-val">-</span></div>
+              <div class="stat">Latent mean: <span id="latent-mean">-</span></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: latent constructs are...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Unobserved</option>
+                <option value="b">Directly measured</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>2. Identify scale types</h4>
+            <p class="small">
+              Match each response format to the correct scale type.
+            </p>
+            <div class="scale-grid" id="scale-quiz">
+              <div class="scale-card">
+                <div class="scale-title">How satisfied are you with your job? (1-7)</div>
+                <select data-answer="likert">
+                  <option value="">Select scale type</option>
+                  <option value="likert">Likert</option>
+                  <option value="semantic">Semantic differential</option>
+                  <option value="binary">Binary</option>
+                  <option value="ratio">Ratio</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">Agree / Disagree with statement (yes/no)</div>
+                <select data-answer="binary">
+                  <option value="">Select scale type</option>
+                  <option value="likert">Likert</option>
+                  <option value="semantic">Semantic differential</option>
+                  <option value="binary">Binary</option>
+                  <option value="ratio">Ratio</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">Rate the brand: Unfriendly 1 - 7 Friendly</div>
+                <select data-answer="semantic">
+                  <option value="">Select scale type</option>
+                  <option value="likert">Likert</option>
+                  <option value="semantic">Semantic differential</option>
+                  <option value="binary">Binary</option>
+                  <option value="ratio">Ratio</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">Monthly income in USD</div>
+                <select data-answer="ratio">
+                  <option value="">Select scale type</option>
+                  <option value="likert">Likert</option>
+                  <option value="semantic">Semantic differential</option>
+                  <option value="binary">Binary</option>
+                  <option value="ratio">Ratio</option>
+                </select>
+              </div>
+            </div>
+            <div class="controls">
+              <button class="btn" id="scale-check">Check answers</button>
+            </div>
+            <div class="stats">
+              <div class="stat">Score: <span id="scale-score">-</span></div>
+              <div class="stat">Feedback: <span id="scale-feedback">-</span></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>3. Probability sampling simulator</h4>
+            <p class="small">
+              The population has green and red groups split across space. Try different
+              sampling methods, sample sizes, and population shares.
+            </p>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Sampling method</label>
+                <select id="prob-method">
+                  <option value="simple">Simple random</option>
+                  <option value="stratified">Stratified</option>
+                  <option value="cluster">Cluster</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label>Sample size</label>
+                <input id="prob-n" type="range" min="10" max="120" step="5" value="40">
+              </div>
+              <div class="control-row">
+                <label>Population share red</label>
+                <input id="prob-share" type="range" min="0.1" max="0.9" step="0.05" value="0.5">
+              </div>
+            </div>
+            <div class="grid-2">
+              <canvas id="prob-pop-canvas" width="520" height="260" aria-label="Population map"></canvas>
+              <canvas id="prob-sample-canvas" width="520" height="260" aria-label="Sample outcomes"></canvas>
+            </div>
+            <div class="stats">
+              <div class="stat">Population red share: <span id="prob-pop">-</span></div>
+              <div class="stat">Sample red share: <span id="prob-sample">-</span></div>
+              <div class="stat">Gap: <span id="prob-gap">-</span></div>
+            </div>
+            <div class="topic-note">Cluster sampling: click the population map to move the cluster seed.</div>
+          </li>
+          <li class="topic-card">
+            <h4>4. Non-probability sampling simulator</h4>
+            <p class="small">
+              Convenience sampling depends on where the researcher stands. Snowball sampling
+              depends on referrals and homophily.
+            </p>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Method</label>
+                <select id="nonprob-method">
+                  <option value="convenience">Convenience</option>
+                  <option value="snowball">Snowball</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label>Sample size</label>
+                <input id="nonprob-n" type="range" min="10" max="120" step="5" value="40">
+              </div>
+              <div class="control-row">
+                <label>Homophily (snowball)</label>
+                <input id="nonprob-h" type="range" min="0" max="0.9" step="0.05" value="0.6">
+              </div>
+            </div>
+            <div class="grid-2">
+              <canvas id="nonprob-pop-canvas" width="520" height="260" aria-label="Population for nonprobability sampling"></canvas>
+              <canvas id="nonprob-sample-canvas" width="520" height="260" aria-label="Nonprobability sample outcome"></canvas>
+            </div>
+            <div class="stats">
+              <div class="stat">Population red share: <span id="nonprob-pop">-</span></div>
+              <div class="stat">Sample red share: <span id="nonprob-sample">-</span></div>
+              <div class="stat">Gap: <span id="nonprob-gap">-</span></div>
+            </div>
+            <div class="topic-note">Click on the population to move the researcher or seed the snowball.</div>
+          </li>
+          <li class="topic-card">
+            <h4>5. Sampling method selector</h4>
+            <p class="callout">
+              Sampling choices determine how well survey results generalize to the population.
+              Explore trade-offs between feasibility and representativeness.
+            </p>
+            <div class="controls">
+              <div class="control-row">
+                <label>Sampling method</label>
+                <select id="sample-select">
+                  <option value="simple">Simple random sampling</option>
+                  <option value="stratified">Stratified sampling</option>
+                  <option value="cluster">Cluster sampling</option>
+                  <option value="convenience">Convenience sampling</option>
+                  <option value="snowball">Snowball sampling</option>
+                </select>
+              </div>
+            </div>
+            <div class="stats">
+              <div class="stat">
+                <strong>Best for</strong>
+                <div id="sample-best" class="small"></div>
+              </div>
+              <div class="stat">
+                <strong>Bias risks</strong>
+                <div id="sample-risk" class="small"></div>
+              </div>
+              <div class="stat">
+                <strong>Note</strong>
+                <div id="sample-note" class="small"></div>
+              </div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>6. Nonresponse bias in practice</h4>
+            <p class="small">
+              A firm surveys employee well-being. Stressed employees respond less, so the response
+              rate correlates with group membership and biases the mean.
+            </p>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Population proportion (p): <strong id="bias-p-label">0.5</strong></label>
+                <input id="bias-p" type="range" min="0.1" max="0.9" step="0.05" value="0.5">
+              </div>
+              <div class="control-row">
+                <label>Response bias: <strong id="bias-b-label">0.2</strong></label>
+                <input id="bias-b" type="range" min="0" max="0.4" step="0.05" value="0.2">
+              </div>
+            </div>
+            <canvas id="bias-canvas" width="820" height="240" aria-label="Nonresponse bias chart"></canvas>
+            <div class="stats">
+              <div class="stat">Population mean: <span id="bias-pop">-</span></div>
+              <div class="stat">Respondent mean: <span id="bias-sample">-</span></div>
+              <div class="stat">Bias gap: <span id="bias-gap">-</span></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>7. Reliability vs validity</h4>
+            <p class="small">
+              Reliability = consistency. Validity = accuracy. Consider job satisfaction measures
+              and classify each as reliable and/or valid.
+            </p>
+            <ul class="small">
+              <li>Weekly job satisfaction surveys can be consistent but biased by scale wording.</li>
+              <li>Single mood check-ins can be accurate on average but highly noisy.</li>
+              <li>Calibrated multi-item indices can be both consistent and accurate.</li>
+            </ul>
+            <div class="scale-grid" id="rv-quiz">
+              <div class="scale-card">
+                <div class="scale-title">Consistent but always 2 points too high</div>
+                <label><input type="checkbox" data-answer="reliable"> Reliable</label>
+                <label><input type="checkbox" data-answer="valid"> Valid</label>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">Accurate on average but noisy day to day</div>
+                <label><input type="checkbox" data-answer="reliable"> Reliable</label>
+                <label><input type="checkbox" data-answer="valid"> Valid</label>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">Consistent and centered on the true value</div>
+                <label><input type="checkbox" data-answer="reliable"> Reliable</label>
+                <label><input type="checkbox" data-answer="valid"> Valid</label>
+              </div>
+            </div>
+            <div class="controls">
+              <button class="btn" id="rv-check">Check answers</button>
+            </div>
+            <div class="stats">
+              <div class="stat">Score: <span id="rv-score">-</span></div>
+              <div class="stat">Feedback: <span id="rv-feedback">-</span></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>8. Cronbach alpha and inconsistent items</h4>
+            <p class="small">
+              Select which items to include in a happiness scale. Items about unrelated topics
+              lower alpha. Use the thermometer to interpret the cutoffs.
+            </p>
+            <div class="scale-grid" id="alpha-items">
+              <div class="scale-card">
+                <label><input type="checkbox" checked data-item="happy1"> I feel happy most days.</label>
+              </div>
+              <div class="scale-card">
+                <label><input type="checkbox" checked data-item="happy2"> I wake up optimistic.</label>
+              </div>
+              <div class="scale-card">
+                <label><input type="checkbox" checked data-item="happy3"> I enjoy my daily activities.</label>
+              </div>
+              <div class="scale-card">
+                <label><input type="checkbox" checked data-item="noise1"> I like watching sports.</label>
+              </div>
+              <div class="scale-card">
+                <label><input type="checkbox" checked data-item="noise2"> I prefer coffee over tea.</label>
+              </div>
+            </div>
+            <div class="thermo">
+              <div class="thermo-track">
+                <div class="thermo-bar" id="alpha-thermo"></div>
+              </div>
+              <div class="thermo-labels">
+                <span>Low (&lt;0.6)</span>
+                <span>OK (0.7)</span>
+                <span>Good (0.8+)</span>
+              </div>
+            </div>
+            <div class="stats">
+              <div class="stat">Alpha: <span id="alpha-item-val">-</span></div>
+              <div class="stat">Interpretation: <span id="alpha-item-note">-</span></div>
+            </div>
+            <div class="mini-check" data-answer="b">
+              <label>Quick check: higher alpha usually indicates...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Lower consistency</option>
+                <option value="b">Higher consistency</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+            <div class="card" style="margin-top: 16px;">
+              <h3>Interactive 2: Cronbach alpha intuition</h3>
+              <p class="callout">
+                Internal consistency grows with more items and higher inter-item correlation.
+              </p>
+              <div class="controls grid-2">
+                <div class="control-row">
+                  <label>Number of items (k)</label>
+                  <input id="alpha-k" type="range" min="3" max="12" step="1" value="6">
+                </div>
+                <div class="control-row">
+                  <label>Average inter-item correlation (r)</label>
+                  <input id="alpha-r" type="range" min="0.1" max="0.9" step="0.05" value="0.4">
+                </div>
+              </div>
+              <div class="stats">
+                <div class="stat">Alpha: <span id="alpha-val">-</span></div>
+                <div class="stat">Rule of thumb: <span id="alpha-interpret">-</span></div>
+              </div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>9. Convergent and discriminant validity</h4>
+            <p class="small">
+              Build two scales (Happiness and Stress). Convergent validity is high when items
+              align with their own construct and not with the other.
+            </p>
+            <div class="scale-grid" id="validity-builder">
+              <div class="scale-card">
+                <div class="scale-title">I feel calm and content.</div>
+                <select data-type="happy">
+                  <option value="">Assign to scale</option>
+                  <option value="happy">Happiness</option>
+                  <option value="stress">Stress</option>
+                  <option value="exclude">Exclude</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">I feel overwhelmed at work.</div>
+                <select data-type="stress">
+                  <option value="">Assign to scale</option>
+                  <option value="happy">Happiness</option>
+                  <option value="stress">Stress</option>
+                  <option value="exclude">Exclude</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">Most days I am cheerful.</div>
+                <select data-type="happy">
+                  <option value="">Assign to scale</option>
+                  <option value="happy">Happiness</option>
+                  <option value="stress">Stress</option>
+                  <option value="exclude">Exclude</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">I feel tense and worried.</div>
+                <select data-type="stress">
+                  <option value="">Assign to scale</option>
+                  <option value="happy">Happiness</option>
+                  <option value="stress">Stress</option>
+                  <option value="exclude">Exclude</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">I enjoy my free time.</div>
+                <select data-type="happy">
+                  <option value="">Assign to scale</option>
+                  <option value="happy">Happiness</option>
+                  <option value="stress">Stress</option>
+                  <option value="exclude">Exclude</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">I struggle to relax.</div>
+                <select data-type="stress">
+                  <option value="">Assign to scale</option>
+                  <option value="happy">Happiness</option>
+                  <option value="stress">Stress</option>
+                  <option value="exclude">Exclude</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">I prefer coffee over tea.</div>
+                <select data-type="noise">
+                  <option value="">Assign to scale</option>
+                  <option value="happy">Happiness</option>
+                  <option value="stress">Stress</option>
+                  <option value="exclude">Exclude</option>
+                </select>
+              </div>
+              <div class="scale-card">
+                <div class="scale-title">The weather affects my commute.</div>
+                <select data-type="noise">
+                  <option value="">Assign to scale</option>
+                  <option value="happy">Happiness</option>
+                  <option value="stress">Stress</option>
+                  <option value="exclude">Exclude</option>
+                </select>
+              </div>
+            </div>
+            <canvas id="validity-canvas" width="820" height="240" aria-label="Validity scatter"></canvas>
+            <div class="stats">
+              <div class="stat">
+                <strong>Convergent</strong>
+                <div class="thermo-track"><div class="thermo-bar" id="validity-conv-bar"></div></div>
+                <div class="small">Score: <span id="validity-conv">-</span></div>
+              </div>
+              <div class="stat">
+                <strong>Discriminant</strong>
+                <div class="thermo-track"><div class="thermo-bar" id="validity-disc-bar"></div></div>
+                <div class="small">Score: <span id="validity-disc">-</span></div>
+              </div>
+              <div class="stat">
+                <strong>Overall note</strong>
+                <div class="thermo-track"><div class="thermo-bar" id="validity-note-bar"></div></div>
+                <div class="small">Note: <span id="validity-note">-</span></div>
+              </div>
+            </div>
+            <div class="mini-check" data-answer="b">
+              <label>Quick check: discriminant validity means items...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Correlate with unrelated constructs</option>
+                <option value="b">Do not correlate with unrelated constructs</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>10. EFA case study: Digital well-being scale</h4>
+            <p class="small">
+              A wellness team surveys how people manage digital overload. Items measure
+              Digital Balance (control and boundaries) and Social Strain (exhaustion and pressure).
+              Run EFA to uncover the latent structure, then interpret the scree plot and loadings.
+            </p>
+            <ul class="small">
+              <li>Digital Balance items: “I can disconnect after work”, “I control notifications”, “I take breaks”.</li>
+              <li>Social Strain items: “Online interactions drain me”, “I feel pressured to respond”, “I feel digitally overwhelmed”.</li>
+              <li>Look for clear loadings (&gt;0.4) and limited cross-loadings (&lt;0.3).</li>
+            </ul>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Sample size</label>
+                <input id="efa-n" type="range" min="120" max="600" step="20" value="260">
+              </div>
+              <div class="control-row">
+                <label>Noise level</label>
+                <input id="efa-noise" type="range" min="0.2" max="1.2" step="0.1" value="0.6">
+              </div>
+              <div class="control-row">
+                <label>&nbsp;</label>
+                <button class="btn" id="efa-run">Resimulate</button>
+              </div>
+              <div class="control-row">
+                <label>Select item for loading view</label>
+                <select id="efa-item"></select>
+              </div>
+            </div>
+            <div class="grid-2">
+              <canvas id="efa-scree" width="520" height="240" aria-label="Scree plot"></canvas>
+              <canvas id="loading-canvas" width="520" height="240" aria-label="Item loading plot"></canvas>
+            </div>
+            <table class="output-table" id="efa-table"></table>
+            <p class="small" id="efa-note">-</p>
+          </li>
+          <li class="topic-card">
+            <h4>11. Confirmatory factor analysis (CFA)</h4>
+            <p class="small">
+              Now test the hypothesized two-factor model from the EFA. The model says Digital Balance
+              items load on Factor 1 and Social Strain items load on Factor 2 with no cross-loadings.
+            </p>
+            <ul class="small">
+              <li>Balance items: “Disconnect after work”, “Control notifications”, “Take breaks”.</li>
+              <li>Strain items: “Interactions drain me”, “Pressured to respond”, “Digitally overwhelmed”.</li>
+              <li>Good fit: CFI &gt; 0.95, RMSEA &lt; 0.06, SRMR &lt; 0.08.</li>
+            </ul>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Cross-loading intensity</label>
+                <input id="cfa-cross" type="range" min="0" max="0.6" step="0.05" value="0.1">
+              </div>
+              <div class="control-row">
+                <label>Error variance</label>
+                <input id="cfa-error" type="range" min="0.2" max="1.2" step="0.1" value="0.6">
+              </div>
+            </div>
+            <canvas id="cfa-canvas" width="820" height="240" aria-label="CFA model fit"></canvas>
+            <div class="stats">
+              <div class="stat">CFI: <span id="cfa-cfi">-</span></div>
+              <div class="stat">RMSEA: <span id="cfa-rmsea">-</span></div>
+              <div class="stat">SRMR: <span id="cfa-srmr">-</span></div>
+              <div class="stat">Fit note: <span id="cfa-note">-</span></div>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section" id="quick-check">
+        <div class="card">
+          <h3>Quick check</h3>
+          <div class="quiz" data-answer="a">
+            <strong>1) Survey measurement often includes:</strong>
+            <label><input type="radio" name="q1" value="a"> Measurement error.</label>
+            <label><input type="radio" name="q1" value="b"> Zero noise.</label>
+            <label><input type="radio" name="q1" value="c"> Perfect precision.</label>
+            <label><input type="radio" name="q1" value="d"> No bias ever.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="b">
+            <strong>2) Factor analysis is used to:</strong>
+            <label><input type="radio" name="q2" value="a"> Draw a random sample.</label>
+            <label><input type="radio" name="q2" value="b"> Understand latent structure.</label>
+            <label><input type="radio" name="q2" value="c"> Increase response rates.</label>
+            <label><input type="radio" name="q2" value="d"> Replace measurement models.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="a">
+            <strong>3) Good practice in survey design is to:</strong>
+            <label><input type="radio" name="q3" value="a"> Use validated scales from literature.</label>
+            <label><input type="radio" name="q3" value="b"> Invent items without testing.</label>
+            <label><input type="radio" name="q3" value="c"> Skip pilot testing.</label>
+            <label><input type="radio" name="q3" value="d"> Avoid checking reliability.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="a">
+            <strong>4) Multi-item scales generally:</strong>
+            <label><input type="radio" name="q4" value="a"> Reduce measurement error.</label>
+            <label><input type="radio" name="q4" value="b"> Increase noise.</label>
+            <label><input type="radio" name="q4" value="c"> Eliminate validity concerns.</label>
+            <label><input type="radio" name="q4" value="d"> Force binary responses.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="b">
+            <strong>5) A pilot survey is done:</strong>
+            <label><input type="radio" name="q5" value="a"> After publication.</label>
+            <label><input type="radio" name="q5" value="b"> Before full deployment.</label>
+            <label><input type="radio" name="q5" value="c"> Only if samples are large.</label>
+            <label><input type="radio" name="q5" value="d"> Instead of reliability tests.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="a">
+            <strong>6) Good sampling aims for:</strong>
+            <label><input type="radio" name="q6" value="a"> Representativeness.</label>
+            <label><input type="radio" name="q6" value="b"> Convenience only.</label>
+            <label><input type="radio" name="q6" value="c"> Zero variance.</label>
+            <label><input type="radio" name="q6" value="d"> Smallest possible samples.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="b">
+            <strong>7) More population heterogeneity usually needs:</strong>
+            <label><input type="radio" name="q7" value="a"> Smaller samples.</label>
+            <label><input type="radio" name="q7" value="b"> Larger samples.</label>
+            <label><input type="radio" name="q7" value="c"> Fewer items.</label>
+            <label><input type="radio" name="q7" value="d"> No sampling frame.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="a">
+            <strong>8) Probabilistic sampling requires:</strong>
+            <label><input type="radio" name="q8" value="a"> Known selection probabilities.</label>
+            <label><input type="radio" name="q8" value="b"> Only referrals.</label>
+            <label><input type="radio" name="q8" value="c"> Convenience access.</label>
+            <label><input type="radio" name="q8" value="d"> Snowball chains.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="b">
+            <strong>9) Simple random sampling means:</strong>
+            <label><input type="radio" name="q9" value="a"> Only clusters are selected.</label>
+            <label><input type="radio" name="q9" value="b"> Each unit has equal chance.</label>
+            <label><input type="radio" name="q9" value="c"> Only one subgroup is sampled.</label>
+            <label><input type="radio" name="q9" value="d"> Selection depends on referrals.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="a">
+            <strong>10) Stratified sampling draws:</strong>
+            <label><input type="radio" name="q10" value="a"> Samples within each subgroup.</label>
+            <label><input type="radio" name="q10" value="b"> Only from one subgroup.</label>
+            <label><input type="radio" name="q10" value="c"> One big cluster only.</label>
+            <label><input type="radio" name="q10" value="d"> Only volunteers.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="b">
+            <strong>11) Cluster sampling selects:</strong>
+            <label><input type="radio" name="q11" value="a"> Individuals one by one.</label>
+            <label><input type="radio" name="q11" value="b"> Groups or clusters.</label>
+            <label><input type="radio" name="q11" value="c"> Only the smallest units.</label>
+            <label><input type="radio" name="q11" value="d"> Only those who respond fast.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="b">
+            <strong>12) Purposive sampling selects:</strong>
+            <label><input type="radio" name="q12" value="a"> Everyone equally.</label>
+            <label><input type="radio" name="q12" value="b"> Information-rich cases.</label>
+            <label><input type="radio" name="q12" value="c"> Only random clusters.</label>
+            <label><input type="radio" name="q12" value="d"> Only first volunteers.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="b">
+            <strong>13) Reliability refers to:</strong>
+            <label><input type="radio" name="q13" value="a"> Measurement accuracy only.</label>
+            <label><input type="radio" name="q13" value="b"> Consistency of measurement.</label>
+            <label><input type="radio" name="q13" value="c"> Higher response rate.</label>
+            <label><input type="radio" name="q13" value="d"> Perfect sample balance.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="a">
+            <strong>14) Content validity is often checked by:</strong>
+            <label><input type="radio" name="q14" value="a"> Expert review.</label>
+            <label><input type="radio" name="q14" value="b"> Random sampling only.</label>
+            <label><input type="radio" name="q14" value="c"> Dropping all items.</label>
+            <label><input type="radio" name="q14" value="d"> Ignoring theory.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="c">
+            <strong>15) Exploratory factor analysis is used when:</strong>
+            <label><input type="radio" name="q15" value="a"> The number of factors is fixed and known.</label>
+            <label><input type="radio" name="q15" value="b"> You only have one item per construct.</label>
+            <label><input type="radio" name="q15" value="c"> You are unsure how items load onto latent factors.</label>
+            <label><input type="radio" name="q15" value="d"> The structure is pre-specified.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="b">
+            <strong>16) The scree plot helps decide:</strong>
+            <label><input type="radio" name="q16" value="a"> Sample size only.</label>
+            <label><input type="radio" name="q16" value="b"> Number of factors.</label>
+            <label><input type="radio" name="q16" value="c"> Which items to drop first.</label>
+            <label><input type="radio" name="q16" value="d"> Response rate targets.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="a">
+            <strong>17) Good items should load:</strong>
+            <label><input type="radio" name="q17" value="a"> Strongly on one factor.</label>
+            <label><input type="radio" name="q17" value="b"> Equally on all factors.</label>
+            <label><input type="radio" name="q17" value="c"> Not at all.</label>
+            <label><input type="radio" name="q17" value="d"> Only on error terms.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="b">
+            <strong>18) CFA is used when the structure is:</strong>
+            <label><input type="radio" name="q18" value="a"> Unknown.</label>
+            <label><input type="radio" name="q18" value="b"> Pre-specified.</label>
+            <label><input type="radio" name="q18" value="c"> Random each time.</label>
+            <label><input type="radio" name="q18" value="d"> Not based on theory.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="a">
+            <strong>19) If you want relationships among latent variables, use:</strong>
+            <label><input type="radio" name="q19" value="a"> SEM.</label>
+            <label><input type="radio" name="q19" value="b"> Simple averages only.</label>
+            <label><input type="radio" name="q19" value="c"> Pure convenience samples.</label>
+            <label><input type="radio" name="q19" value="d"> Only descriptive stats.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section card" id="case-study">
+        <h3>Case study: Digital well-being scale</h3>
+        <p>
+          You design a survey to measure digital well-being. You adapt items from prior
+          literature and run a pilot with 250 respondents.
+        </p>
+        <ul>
+          <li>Use stratified sampling to balance age groups.</li>
+          <li>Check reliability with Cronbach alpha and item diagnostics.</li>
+          <li>Run exploratory factor analysis to confirm latent structure.</li>
+          <li>Refine the scale and re-test with a larger sample.</li>
+        </ul>
+      </section>
+
+      <section class="section card" id="r-section">
+        <h3>Interactive R test bench: reliability and factor analysis</h3>
+        <p class="callout">
+          Simulate two latent factors, compute Cronbach alpha, and run exploratory factor analysis.
+        </p>
+        <ul>
+          <li>Increase items per factor to see alpha rise.</li>
+          <li>Increase noise to see reliability drop.</li>
+          <li>Inspect factor loadings to confirm item clusters.</li>
+          <li>Use the scree plot to select the number of factors.</li>
+        </ul>
+        <div class="bench">
+          <div class="grid-2">
+            <div class="control-row">
+              <label>Sample size</label>
+              <input id="r-n" type="number" min="100" max="1000" step="50" value="300">
+            </div>
+            <div class="control-row">
+              <label>Items per factor</label>
+              <input id="r-k" type="number" min="3" max="8" step="1" value="4">
+            </div>
+            <div class="control-row">
+              <label>Noise (sigma)</label>
+              <input id="r-sd" type="number" min="0.3" max="2" step="0.1" value="0.7">
+            </div>
+          </div>
+          <div class="controls">
+            <button class="btn secondary" id="r-build">Update R code</button>
+          </div>
+          <textarea id="r-code" spellcheck="false"></textarea>
+          <div class="controls">
+            <button class="btn" id="r-run" disabled>Run R</button>
+            <button class="btn secondary" id="r-reset">Reset</button>
+          </div>
+          <div class="bench-output">
+            <pre id="r-output">Loading webR, please wait...</pre>
+            <canvas id="r-plot" width="900" height="520"></canvas>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <footer class="container">© 2026 Francesco Balocco.</footer>
+
+    <script type="module">
+      const byId = (id) => document.getElementById(id);
+
+      function fmt(num, digits = 2) {
+        return Number(num).toFixed(digits);
+      }
+
+      function typesetMath(el) {
+        if (window.MathJax && window.MathJax.typesetPromise) {
+          window.MathJax.typesetPromise(el ? [el] : undefined);
+        }
+      }
+
+      function drawAxes(ctx, width, height, padding) {
+        ctx.strokeStyle = "#cbd5f6";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(padding, height - padding);
+        ctx.lineTo(width - padding, height - padding);
+        ctx.moveTo(padding, height - padding);
+        ctx.lineTo(padding, padding);
+        ctx.stroke();
+      }
+
+      function mean(arr) {
+        return arr.reduce((s, v) => s + v, 0) / arr.length;
+      }
+
+      function variance(arr, m) {
+        const mu = m ?? mean(arr);
+        return mean(arr.map((v) => (v - mu) ** 2));
+      }
+
+      function corr(a, b) {
+        const ma = mean(a);
+        const mb = mean(b);
+        const cov = mean(a.map((v, i) => (v - ma) * (b[i] - mb)));
+        const sa = Math.sqrt(variance(a, ma));
+        const sb = Math.sqrt(variance(b, mb));
+        return sa === 0 || sb === 0 ? 0 : cov / (sa * sb);
+      }
+
+      function normalSample(mu = 0, sigma = 1) {
+        const u1 = Math.random();
+        const u2 = Math.random();
+        const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+        return mu + sigma * z;
+      }
+
+      function clamp(v, min, max) {
+        return Math.min(max, Math.max(min, v));
+      }
+
+      function setupViewSettings() {
+        const cards = Array.from(
+          document.querySelectorAll(".topic-card, section.card, section#quick-check")
+        );
+        if (!cards.length) return;
+        const crumbEl = document.querySelector(".breadcrumbs");
+        const crumbText = crumbEl ? crumbEl.textContent : "";
+        const hasSlash = crumbText.indexOf("/") !== -1;
+        const sessionLabel = hasSlash ? crumbText.split("/").pop().trim() : crumbText.trim();
+        const headingEl = document.querySelector("header h1");
+        const sessionHeading = headingEl && headingEl.textContent ? headingEl.textContent.trim() : "";
+        const sessionTitle = [sessionLabel, sessionHeading].filter(Boolean).join(" - ");
+        const sessionPrefix = sessionTitle ? `${sessionTitle}. ` : "";
+        const header = document.querySelector("header");
+        const progressBar = byId("progress-bar");
+        const progressText = byId("progress-text");
+        const prevBtn = byId("prev-card");
+        const nextBtn = byId("next-card");
+        const settingsBtn = byId("settings-btn");
+        const panel = byId("settings-panel");
+        const modeInputs = Array.from(document.querySelectorAll("input[name='view-mode']"));
+        let index = 0;
+        const total = cards.length;
+
+        function updateSplitPaneHeight() {
+          if (!document.body.classList.contains("view-mode-single")) return;
+          const topbar = document.querySelector(".topbar");
+          const topbarH = topbar ? topbar.getBoundingClientRect().height : 0;
+          const h = Math.max(320, window.innerHeight - topbarH - 140);
+          document.documentElement.style.setProperty("--split-pane-height", `${h}px`);
+        }
+
+        function setMode(mode) {
+          localStorage.setItem("viewMode", mode);
+          modeInputs.forEach((input) => {
+            input.checked = input.value === mode;
+          });
+          document.body.classList.toggle("view-mode-single", mode === "single");
+          document.body.classList.toggle("view-mode-all", mode === "all");
+          updateSplitPaneHeight();
+          update();
+        }
+
+        function update() {
+          const checkedInput = modeInputs.find((input) => input.checked);
+          const mode = checkedInput ? checkedInput.value : "all";
+          cards.forEach((card, i) => {
+            const visible = mode === "all" || i === index;
+            card.style.display = visible ? "" : "none";
+          });
+          prevBtn.disabled = mode === "all" || index === 0;
+          nextBtn.disabled = mode === "all" || index === total - 1;
+          const progress = mode === "all" ? 100 : ((index + 1) / total) * 100;
+          progressBar.style.width = `${progress}%`;
+          progressText.textContent =
+            mode === "all"
+              ? `${sessionPrefix}All cards (${total})`
+              : `${sessionPrefix}Card ${index + 1} of ${total}`;
+          if (header) {
+            header.style.display = mode === "all" || index === 0 ? "" : "none";
+          }
+          updateSplitPaneHeight();
+        }
+
+        prevBtn.addEventListener("click", () => {
+          index = Math.max(0, index - 1);
+          update();
+        });
+        nextBtn.addEventListener("click", () => {
+          index = Math.min(total - 1, index + 1);
+          update();
+        });
+        settingsBtn.addEventListener("click", () => {
+          panel.classList.toggle("open");
+        });
+        document.addEventListener("click", (event) => {
+          if (!panel.contains(event.target) && event.target !== settingsBtn) {
+            panel.classList.remove("open");
+          }
+        });
+        modeInputs.forEach((input) => input.addEventListener("change", () => setMode(input.value)));
+        window.addEventListener("resize", updateSplitPaneHeight);
+
+        const savedMode = localStorage.getItem("viewMode") || "all";
+        setMode(savedMode);
+      }
+
+      function reorderSections() {
+        const main = document.querySelector("main");
+        const quick = byId("quick-check");
+        const caseCard = buildCaseStudyCard();
+        if (caseCard) main.appendChild(caseCard);
+        if (quick) main.appendChild(quick);
+      }
+
+      function buildCaseStudyCard() {
+        const caseSection = byId("case-study");
+        const rSection = byId("r-section");
+        if (!caseSection || !rSection) return null;
+        const card = document.createElement("section");
+        card.className = "section card";
+        card.id = "case-study-card";
+        const grid = document.createElement("div");
+        grid.className = "card-grid";
+        const left = document.createElement("div");
+        left.className = "card-left";
+        const right = document.createElement("div");
+        right.className = "card-right";
+
+        const title = caseSection.querySelector("h3");
+        if (title) left.appendChild(title);
+        Array.from(caseSection.children).forEach((child) => {
+          if (child !== title) left.appendChild(child);
+        });
+
+        const intro = document.createElement("p");
+        intro.className = "exercise-intro";
+        intro.textContent = "How to use: adjust parameters, update the R code, then run it to see outputs.";
+        right.appendChild(intro);
+        Array.from(rSection.children).forEach((child) => {
+          if (child.tagName !== "H3") right.appendChild(child);
+        });
+
+        grid.appendChild(left);
+        grid.appendChild(right);
+        card.appendChild(grid);
+        caseSection.remove();
+        rSection.remove();
+        return card;
+      }
+
+      function setupTheoryCards() {
+        const list = document.querySelector(".topic-list");
+        if (!list) return;
+        const section = list.closest("section");
+        if (section) {
+          const heading = section.querySelector("h3");
+          const note = section.querySelector(":scope > p.small");
+          if (heading) heading.remove();
+          if (note) note.remove();
+          section.classList.remove("card");
+        }
+
+        const theory = [
+          "Many survey concepts are <em>latent</em> (unobserved), like trust or satisfaction. We measure them using multiple observed items (“indicators”). A simple scale score is the mean (or sum) across \(k\) items: \\(\\bar{x}=\\frac{1}{k}\\sum x_i\\). This only makes sense if items are coded in the same direction and intended to measure the same construct.",
+          "Question formats map to measurement levels. Binary (0/1) indicates categories; Likert items are ordered categories (often treated as approximately interval in practice); semantic differentials use bipolar anchors; ratio scales have a meaningful zero. The measurement level determines what summaries and models are appropriate.",
+          "With <strong>probability sampling</strong>, each unit has a known (non-zero) selection probability. That’s what allows principled inference (and weighting) from sample to population—for example estimating a population proportion with \\(\\hat{p}=\\frac{1}{n}\\sum I(y_i=1)\\).",
+          "With <strong>non-probability sampling</strong> (convenience, snowball), selection probabilities are unknown. Results can still be useful, but representativeness is not guaranteed and selection bias is hard to quantify without additional assumptions or benchmarking.",
+          "Sampling method is a trade-off between feasibility (cost/access/time) and bias risk. Ask: who is missing, and would they answer differently? That question matters more than sample size alone.",
+          "Nonresponse bias happens when the probability of responding is related to the outcome of interest. High response rate helps, but it is not a guarantee; low response rate is a warning sign. Techniques like follow-ups, reminders, and weighting can reduce bias, but only if you have information related to response propensity.",
+          "<strong>Reliability</strong> is consistency (low random error); <strong>validity</strong> is whether you measure what you intend (low systematic error). A measure can be reliable but invalid (consistently wrong), or valid on average but noisy (low reliability).",
+          "Cronbach’s alpha measures internal consistency of a multi-item scale: \\(\\alpha=\\frac{k}{k-1}\\left(1-\\frac{\\sum s_i^2}{s_T^2}\\right)\\). It tends to increase with more items and higher inter-item correlations. Alpha is not “proof” of unidimensionality; use it as a diagnostic, not a certificate.",
+          "Convergent validity: your measure correlates strongly with other measures of the same construct. Discriminant validity: it does not correlate too strongly with different constructs. Together, they help show you are measuring the intended concept (and not just “general positivity”).",
+          "Exploratory factor analysis (EFA) searches for a small number of latent factors that explain the item correlation pattern. Loadings tell how strongly each item relates to each factor; eigenvalues/scree plots help decide how many factors to keep; rotation can make patterns easier to interpret.",
+          "Confirmatory factor analysis (CFA) starts with a specified measurement model (which items load on which factors) and checks how well it reproduces the observed covariances. Fit indices (e.g., CFI, RMSEA, SRMR) summarize mismatch; good fit supports (but does not prove) your proposed structure."
+        ];
+        const intros = [
+          "How to use: move each item slider and watch the latent mean update.",
+          "How to use: match each response format to its scale type.",
+          "How to use: change sampling method, size, and population share to compare estimates.",
+          "How to use: switch method, move the researcher, or seed snowball sampling.",
+          "How to use: select a method to see best use cases and bias risks.",
+          "How to use: adjust population share and response bias to see the mean shift.",
+          "How to use: check the reliability/validity boxes for each scenario.",
+          "How to use: include or exclude items and watch alpha change.",
+          "How to use: assign items to scales and read the validity thermometers.",
+          "How to use: resimulate data and inspect scree and loadings.",
+          "How to use: change cross-loadings and error variance to see fit change."
+        ];
+
+        function stripInteractivePrefix(text) {
+          const trimmed = text.trim();
+          const lower = trimmed.toLowerCase();
+          const prefix = "interactive";
+          if (lower.indexOf(prefix) === 0) {
+            return trimmed.slice(prefix.length).trim();
+          }
+          return trimmed;
+        }
+
+        function stripLeadingNumbering(text) {
+          let s = text.trim();
+          let changed = true;
+          while (changed) {
+            changed = false;
+            let i = 0;
+            while (i < s.length && s[i] >= "0" && s[i] <= "9") i += 1;
+            if (i === 0) break;
+            while (i < s.length && (s[i] === " " || s[i] === "\t")) i += 1;
+            while (i < s.length && (s[i] === "." || s[i] === "-" || s[i] === ":")) {
+              i += 1;
+              while (i < s.length && (s[i] === " " || s[i] === "\t")) i += 1;
+            }
+            s = s.slice(i).trim();
+            changed = true;
+          }
+          while (
+            s.length &&
+            (s[0] === "." || s[0] === "-" || s[0] === ":" || s[0] === " " || s[0] === "\t")
+          ) {
+            s = s.slice(1).trim();
+          }
+          return s;
+        }
+
+        const cards = Array.from(list.querySelectorAll(".topic-card"));
+        cards.forEach((card, i) => {
+          const title = card.querySelector("h4");
+          if (!title) return;
+          const originalTitle = title.textContent.trim();
+          let displayNumber = "";
+          for (let k = 0; k < originalTitle.length; k += 1) {
+            const ch = originalTitle[k];
+            if (ch >= "0" && ch <= "9") displayNumber += ch;
+            else if (!displayNumber && (ch === " " || ch === "\t")) continue;
+            else break;
+          }
+          if (!displayNumber) displayNumber = String(i + 1);
+          let cleanTitle = stripInteractivePrefix(originalTitle);
+          cleanTitle = stripLeadingNumbering(cleanTitle);
+          title.textContent = `${displayNumber}. ${cleanTitle}`;
+          card.dataset.cardNumber = displayNumber;
+          card.dataset.cardTitle = cleanTitle;
+          const content = Array.from(card.children).filter((el) => el !== title);
+          const grid = document.createElement("div");
+          grid.className = "card-grid";
+          const left = document.createElement("div");
+          left.className = "card-left";
+          const right = document.createElement("div");
+          right.className = "card-right";
+          const theoryEl = document.createElement("div");
+          theoryEl.className = "theory";
+          theoryEl.innerHTML = theory[i] || "";
+          const introEl = document.createElement("p");
+          introEl.className = "exercise-intro";
+          introEl.innerHTML = intros[i] || "";
+
+          left.appendChild(title);
+          left.appendChild(theoryEl);
+          right.appendChild(introEl);
+          content.forEach((el) => right.appendChild(el));
+          grid.appendChild(left);
+          grid.appendChild(right);
+          card.innerHTML = "";
+          card.appendChild(grid);
+        });
+        typesetMath(list);
+      }
+
+      function setupLatentConstruct() {
+        const q1 = byId("latent-q1");
+        const q2 = byId("latent-q2");
+        const q3 = byId("latent-q3");
+        const q1Out = byId("latent-q1-val");
+        const q2Out = byId("latent-q2-val");
+        const q3Out = byId("latent-q3-val");
+        const meanOut = byId("latent-mean");
+        const canvas = byId("latent-canvas");
+        const ctx = canvas.getContext("2d");
+
+        function draw() {
+          const v1 = Number(q1.value);
+          const v2 = Number(q2.value);
+          const v3 = Number(q3.value);
+          const avg = (v1 + v2 + v3) / 3;
+          q1Out.textContent = v1;
+          q2Out.textContent = v2;
+          q3Out.textContent = v3;
+          meanOut.textContent = fmt(avg, 2);
+
+          const padding = 40;
+          const minX = 1;
+          const maxX = 3;
+          const minY = 1;
+          const maxY = 7;
+          const scaleX = (x) =>
+            padding + ((x - minX) / (maxX - minX)) * (canvas.width - 2 * padding);
+          const scaleY = (y) =>
+            canvas.height - padding - ((y - minY) / (maxY - minY)) * (canvas.height - 2 * padding);
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          drawAxes(ctx, canvas.width, canvas.height, padding);
+
+          const xs = [1, 2, 3];
+          const ys = [v1, v2, v3];
+          const latentX = 2;
+          const latentY = avg;
+
+          ctx.strokeStyle = "#94a3b8";
+          ctx.lineWidth = 1.5;
+          xs.forEach((x, i) => {
+            ctx.beginPath();
+            ctx.moveTo(scaleX(x), scaleY(ys[i]));
+            ctx.lineTo(scaleX(latentX), scaleY(latentY));
+            ctx.stroke();
+          });
+
+          xs.forEach((x, i) => {
+            ctx.fillStyle = "#60a5fa";
+            ctx.beginPath();
+            ctx.arc(scaleX(x), scaleY(ys[i]), 10, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#0f172a";
+            ctx.font = "12px system-ui, sans-serif";
+            ctx.fillText(String(ys[i]), scaleX(x) - 4, scaleY(ys[i]) + 4);
+          });
+
+          ctx.fillStyle = "#f97316";
+          ctx.beginPath();
+          ctx.arc(scaleX(latentX), scaleY(latentY), 14, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#0f172a";
+          ctx.font = "12px system-ui, sans-serif";
+          ctx.fillText(fmt(latentY, 1), scaleX(latentX) - 8, scaleY(latentY) + 4);
+
+          ctx.fillText("Item", canvas.width - padding - 40, canvas.height - padding + 18);
+          ctx.fillText("Score", padding - 30, padding + 8);
+        }
+
+        [q1, q2, q3].forEach((input) => input.addEventListener("input", draw));
+        draw();
+      }
+
+      function setupScaleClassifier() {
+        const selects = Array.from(byId("scale-quiz").querySelectorAll("select"));
+        const button = byId("scale-check");
+        const scoreOut = byId("scale-score");
+        const feedbackOut = byId("scale-feedback");
+
+        button.addEventListener("click", () => {
+          let correct = 0;
+          selects.forEach((select) => {
+            if (select.value === select.dataset.answer) correct += 1;
+          });
+          scoreOut.textContent = `${correct} / ${selects.length}`;
+          feedbackOut.textContent = correct === selects.length ? "Perfect." : "Review the ones that do not match.";
+        });
+      }
+
+      function setupSamplingProb() {
+        const methodInput = byId("prob-method");
+        const nInput = byId("prob-n");
+        const shareInput = byId("prob-share");
+        const popOut = byId("prob-pop");
+        const sampleOut = byId("prob-sample");
+        const gapOut = byId("prob-gap");
+        const popCanvas = byId("prob-pop-canvas");
+        const sampleCanvas = byId("prob-sample-canvas");
+        const popCtx = popCanvas.getContext("2d");
+        const sampleCtx = sampleCanvas.getContext("2d");
+
+        const cols = 30;
+        const rows = 18;
+        let clusterSeed = { x: Math.floor(cols / 2), y: Math.floor(rows / 2) };
+
+        function buildPopulation(share) {
+          const boundary = Math.round(cols * (1 - share));
+          const points = [];
+          for (let y = 0; y < rows; y += 1) {
+            for (let x = 0; x < cols; x += 1) {
+              const color = x >= boundary ? "red" : "green";
+              points.push({ x, y, color });
+            }
+          }
+          return points;
+        }
+
+        function sampleSimple(population, n) {
+          const pool = population.map((_, i) => i);
+          const picks = [];
+          while (picks.length < n && pool.length > 0) {
+            const idx = Math.floor(Math.random() * pool.length);
+            picks.push(pool.splice(idx, 1)[0]);
+          }
+          return { picks, cluster: null };
+        }
+
+        function sampleStratified(population, n) {
+          const reds = population.map((p, i) => (p.color === "red" ? i : -1)).filter((i) => i >= 0);
+          const greens = population.map((p, i) => (p.color === "green" ? i : -1)).filter((i) => i >= 0);
+          const redShare = reds.length / population.length;
+          const nRed = Math.max(1, Math.round(n * redShare));
+          const nGreen = Math.max(1, n - nRed);
+          const picks = [];
+          while (picks.length < nRed && reds.length > 0) {
+            const idx = Math.floor(Math.random() * reds.length);
+            picks.push(reds.splice(idx, 1)[0]);
+          }
+          while (picks.length < nRed + nGreen && greens.length > 0) {
+            const idx = Math.floor(Math.random() * greens.length);
+            picks.push(greens.splice(idx, 1)[0]);
+          }
+          return { picks, cluster: null };
+        }
+
+        function sampleCluster(population, n) {
+          const side = Math.max(4, Math.round(Math.sqrt(n)));
+          const clusterW = Math.min(cols, side);
+          const clusterH = Math.min(rows, side);
+          const startX = clamp(clusterSeed.x - Math.floor(clusterW / 2), 0, cols - clusterW);
+          const startY = clamp(clusterSeed.y - Math.floor(clusterH / 2), 0, rows - clusterH);
+          const cluster = population
+            .map((p, i) => ({ p, i }))
+            .filter((d) => d.p.x >= startX && d.p.x < startX + clusterW
+              && d.p.y >= startY && d.p.y < startY + clusterH)
+            .map((d) => d.i);
+          const picks = [];
+          const pool = cluster.slice();
+          while (picks.length < n && pool.length > 0) {
+            const idx = Math.floor(Math.random() * pool.length);
+            picks.push(pool.splice(idx, 1)[0]);
+          }
+          while (picks.length < n && cluster.length > 0) {
+            picks.push(cluster[Math.floor(Math.random() * cluster.length)]);
+          }
+          return { picks, cluster: { startX, startY, clusterW, clusterH } };
+        }
+
+        function drawPopulation(population, picks, clusterInfo) {
+          const padding = 40;
+          const w = popCanvas.width;
+          const h = popCanvas.height;
+          popCtx.clearRect(0, 0, w, h);
+          drawAxes(popCtx, w, h, padding);
+          const cellW = (w - 2 * padding) / cols;
+          const cellH = (h - 2 * padding) / rows;
+
+          population.forEach((pt, idx) => {
+            const cx = padding + pt.x * cellW + cellW / 2;
+            const cy = padding + pt.y * cellH + cellH / 2;
+            popCtx.fillStyle = pt.color === "red" ? "#ef4444" : "#22c55e";
+            popCtx.beginPath();
+            popCtx.arc(cx, cy, 4, 0, Math.PI * 2);
+            popCtx.fill();
+            if (picks.indexOf(idx) !== -1) {
+              popCtx.strokeStyle = "#0f172a";
+              popCtx.lineWidth = 1;
+              popCtx.strokeRect(cx - 5, cy - 5, 10, 10);
+            }
+          });
+
+          if (clusterInfo) {
+            popCtx.strokeStyle = "#f97316";
+            popCtx.lineWidth = 2;
+            popCtx.strokeRect(
+              padding + clusterInfo.startX * cellW,
+              padding + clusterInfo.startY * cellH,
+              clusterInfo.clusterW * cellW,
+              clusterInfo.clusterH * cellH
+            );
+          }
+
+          popCtx.fillStyle = "#0f172a";
+          popCtx.font = "12px system-ui, sans-serif";
+          popCtx.fillText("Population map", w - 160, h - 12);
+        }
+
+        function drawSample(redCount, greenCount) {
+          const padding = 40;
+          const w = sampleCanvas.width;
+          const h = sampleCanvas.height;
+          sampleCtx.clearRect(0, 0, w, h);
+          drawAxes(sampleCtx, w, h, padding);
+          const maxVal = Math.max(redCount, greenCount, 1);
+          const scaleY = (v) => (v / (maxVal + 1)) * (h - 2 * padding);
+
+          sampleCtx.fillStyle = "#22c55e";
+          sampleCtx.fillRect(padding + 80, h - padding - scaleY(greenCount), 120, scaleY(greenCount));
+          sampleCtx.fillStyle = "#ef4444";
+          sampleCtx.fillRect(padding + 260, h - padding - scaleY(redCount), 120, scaleY(redCount));
+
+          sampleCtx.fillStyle = "#0f172a";
+          sampleCtx.font = "12px system-ui, sans-serif";
+          sampleCtx.fillText("Green", padding + 110, h - padding + 18);
+          sampleCtx.fillText("Red", padding + 300, h - padding + 18);
+          sampleCtx.fillText("Sample counts", w - 150, h - 12);
+        }
+
+        function update() {
+          const n = Number(nInput.value);
+          const share = Number(shareInput.value);
+          const population = buildPopulation(share);
+          let picksData;
+          if (methodInput.value === "stratified") picksData = sampleStratified(population, n);
+          else if (methodInput.value === "cluster") picksData = sampleCluster(population, n);
+          else picksData = sampleSimple(population, n);
+
+          const picks = picksData.picks;
+          const redCount = picks.filter((i) => population[i].color === "red").length;
+          const greenCount = picks.length - redCount;
+
+          const popRed = population.filter((p) => p.color === "red").length / population.length;
+          const sampleRed = picks.length > 0 ? redCount / picks.length : 0;
+          popOut.textContent = fmt(popRed, 2);
+          sampleOut.textContent = fmt(sampleRed, 2);
+          gapOut.textContent = fmt(sampleRed - popRed, 2);
+
+          drawPopulation(population, picks, picksData.cluster);
+          drawSample(redCount, greenCount);
+        }
+
+        popCanvas.addEventListener("click", (event) => {
+          const rect = popCanvas.getBoundingClientRect();
+          const padding = 40;
+          const x = clamp(event.clientX - rect.left - padding, 0, popCanvas.width - 2 * padding);
+          const y = clamp(event.clientY - rect.top - padding, 0, popCanvas.height - 2 * padding);
+          const gx = Math.round((x / (popCanvas.width - 2 * padding)) * (cols - 1));
+          const gy = Math.round((y / (popCanvas.height - 2 * padding)) * (rows - 1));
+          clusterSeed = { x: gx, y: gy };
+          update();
+        });
+
+        [methodInput, nInput, shareInput].forEach((input) => input.addEventListener("input", update));
+        update();
+      }
+
+      function setupSamplingNonProb() {
+        const methodInput = byId("nonprob-method");
+        const nInput = byId("nonprob-n");
+        const hInput = byId("nonprob-h");
+        const popOut = byId("nonprob-pop");
+        const sampleOut = byId("nonprob-sample");
+        const gapOut = byId("nonprob-gap");
+        const popCanvas = byId("nonprob-pop-canvas");
+        const sampleCanvas = byId("nonprob-sample-canvas");
+        const popCtx = popCanvas.getContext("2d");
+        const sampleCtx = sampleCanvas.getContext("2d");
+
+        const cols = 30;
+        const rows = 18;
+        const share = 0.5;
+        let researcher = { x: Math.floor(cols / 2), y: Math.floor(rows / 2) };
+        let seedIndex = null;
+
+        function buildPopulation() {
+          const boundary = Math.round(cols * (1 - share));
+          const points = [];
+          for (let y = 0; y < rows; y += 1) {
+            for (let x = 0; x < cols; x += 1) {
+              const color = x >= boundary ? "red" : "green";
+              points.push({ x, y, color });
+            }
+          }
+          return points;
+        }
+
+        function convenienceSample(population, n) {
+          const side = Math.max(3, Math.round(Math.sqrt(n)));
+          const half = Math.floor(side / 2);
+          const xs = [researcher.x - half, researcher.x + half];
+          const ys = [researcher.y - half, researcher.y + half];
+          const candidates = population
+            .map((p, i) => ({ p, i }))
+            .filter((d) => d.p.x >= xs[0] && d.p.x <= xs[1] && d.p.y >= ys[0] && d.p.y <= ys[1])
+            .map((d) => d.i);
+          const picks = [];
+          const pool = candidates.slice();
+          while (picks.length < n && pool.length > 0) {
+            const idx = Math.floor(Math.random() * pool.length);
+            picks.push(pool.splice(idx, 1)[0]);
+          }
+          return { picks, box: { xs, ys } };
+        }
+
+        function snowballSample(population, n, homophily) {
+          if (seedIndex === null) seedIndex = Math.floor(Math.random() * population.length);
+          const picks = [seedIndex];
+          let lastColor = population[seedIndex].color;
+          while (picks.length < n) {
+            const same = population
+              .map((p, i) => (p.color === lastColor && picks.indexOf(i) === -1 ? i : -1))
+              .filter((i) => i >= 0);
+            const diff = population
+              .map((p, i) => (p.color !== lastColor && picks.indexOf(i) === -1 ? i : -1))
+              .filter((i) => i >= 0);
+            let pool = Math.random() < homophily ? same : diff;
+            if (pool.length === 0) pool = same.length ? same : diff;
+            if (pool.length === 0) break;
+            const next = pool[Math.floor(Math.random() * pool.length)];
+            picks.push(next);
+            lastColor = population[next].color;
+          }
+          return { picks };
+        }
+
+        function drawPopulation(population, picks, box) {
+          const padding = 40;
+          const w = popCanvas.width;
+          const h = popCanvas.height;
+          popCtx.clearRect(0, 0, w, h);
+          drawAxes(popCtx, w, h, padding);
+          const cellW = (w - 2 * padding) / cols;
+          const cellH = (h - 2 * padding) / rows;
+
+          population.forEach((pt, idx) => {
+            const cx = padding + pt.x * cellW + cellW / 2;
+            const cy = padding + pt.y * cellH + cellH / 2;
+            popCtx.fillStyle = pt.color === "red" ? "#ef4444" : "#22c55e";
+            popCtx.beginPath();
+            popCtx.arc(cx, cy, 4, 0, Math.PI * 2);
+            popCtx.fill();
+            if (picks.indexOf(idx) !== -1) {
+              popCtx.strokeStyle = "#0f172a";
+              popCtx.lineWidth = 1;
+              popCtx.strokeRect(cx - 5, cy - 5, 10, 10);
+            }
+          });
+
+          if (methodInput.value === "convenience" && box) {
+            popCtx.strokeStyle = "#111827";
+            popCtx.lineWidth = 2;
+            popCtx.strokeRect(
+              padding + box.xs[0] * cellW,
+              padding + box.ys[0] * cellH,
+              (box.xs[1] - box.xs[0] + 1) * cellW,
+              (box.ys[1] - box.ys[0] + 1) * cellH
+            );
+            const rx = padding + researcher.x * cellW + cellW / 2;
+            const ry = padding + researcher.y * cellH + cellH / 2;
+            popCtx.fillStyle = "#111827";
+            popCtx.beginPath();
+            popCtx.arc(rx, ry, 5, 0, Math.PI * 2);
+            popCtx.fill();
+          }
+
+          if (methodInput.value === "snowball" && seedIndex !== null) {
+            const seed = population[seedIndex];
+            const sx = padding + seed.x * cellW + cellW / 2;
+            const sy = padding + seed.y * cellH + cellH / 2;
+            popCtx.strokeStyle = "#111827";
+            popCtx.lineWidth = 2;
+            popCtx.beginPath();
+            popCtx.arc(sx, sy, 6, 0, Math.PI * 2);
+            popCtx.stroke();
+          }
+
+          popCtx.fillStyle = "#0f172a";
+          popCtx.font = "12px system-ui, sans-serif";
+          popCtx.fillText("Population map", w - 160, h - 12);
+        }
+
+        function drawSample(redCount, greenCount) {
+          const padding = 40;
+          const w = sampleCanvas.width;
+          const h = sampleCanvas.height;
+          sampleCtx.clearRect(0, 0, w, h);
+          drawAxes(sampleCtx, w, h, padding);
+          const maxVal = Math.max(redCount, greenCount, 1);
+          const scaleY = (v) => (v / (maxVal + 1)) * (h - 2 * padding);
+
+          sampleCtx.fillStyle = "#22c55e";
+          sampleCtx.fillRect(padding + 80, h - padding - scaleY(greenCount), 120, scaleY(greenCount));
+          sampleCtx.fillStyle = "#ef4444";
+          sampleCtx.fillRect(padding + 260, h - padding - scaleY(redCount), 120, scaleY(redCount));
+
+          sampleCtx.fillStyle = "#0f172a";
+          sampleCtx.font = "12px system-ui, sans-serif";
+          sampleCtx.fillText("Green", padding + 110, h - padding + 18);
+          sampleCtx.fillText("Red", padding + 300, h - padding + 18);
+          sampleCtx.fillText("Sample counts", w - 150, h - 12);
+        }
+
+        function update() {
+          const n = Number(nInput.value);
+          const homophily = Number(hInput.value);
+          const population = buildPopulation();
+          let picksData;
+          if (methodInput.value === "snowball") {
+            picksData = snowballSample(population, n, homophily);
+          } else {
+            picksData = convenienceSample(population, n);
+          }
+          const picks = picksData.picks;
+          const redCount = picks.filter((i) => population[i].color === "red").length;
+          const greenCount = picks.length - redCount;
+          const popRed = population.filter((p) => p.color === "red").length / population.length;
+          const sampleRed = picks.length > 0 ? redCount / picks.length : 0;
+
+          popOut.textContent = fmt(popRed, 2);
+          sampleOut.textContent = fmt(sampleRed, 2);
+          gapOut.textContent = fmt(sampleRed - popRed, 2);
+
+          drawPopulation(population, picks, picksData.box);
+          drawSample(redCount, greenCount);
+        }
+
+        popCanvas.addEventListener("click", (event) => {
+          const rect = popCanvas.getBoundingClientRect();
+          const padding = 40;
+          const x = clamp(event.clientX - rect.left - padding, 0, popCanvas.width - 2 * padding);
+          const y = clamp(event.clientY - rect.top - padding, 0, popCanvas.height - 2 * padding);
+          const gx = Math.round((x / (popCanvas.width - 2 * padding)) * (cols - 1));
+          const gy = Math.round((y / (popCanvas.height - 2 * padding)) * (rows - 1));
+          researcher = { x: gx, y: gy };
+          const population = buildPopulation();
+          seedIndex = population.findIndex((p) => p.x === gx && p.y === gy);
+          if (seedIndex < 0) seedIndex = 0;
+          update();
+        });
+
+        [methodInput, nInput, hInput].forEach((input) => input.addEventListener("input", update));
+        update();
+      }
+
+      function setupReliabilityValidity() {
+        const cards = Array.from(byId("rv-quiz").querySelectorAll(".scale-card"));
+        const button = byId("rv-check");
+        const scoreOut = byId("rv-score");
+        const feedbackOut = byId("rv-feedback");
+        const expected = [
+          { reliable: true, valid: false },
+          { reliable: false, valid: true },
+          { reliable: true, valid: true }
+        ];
+
+        button.addEventListener("click", () => {
+          let correct = 0;
+          cards.forEach((card, idx) => {
+            const checks = Array.from(card.querySelectorAll("input[type='checkbox']"));
+            const answers = { reliable: false, valid: false };
+            checks.forEach((box) => {
+              if (box.checked) answers[box.dataset.answer] = true;
+            });
+            if (answers.reliable === expected[idx].reliable && answers.valid === expected[idx].valid) {
+              correct += 1;
+            }
+          });
+          scoreOut.textContent = `${correct} / ${cards.length}`;
+          feedbackOut.textContent = correct === cards.length ? "Perfect." : "Review reliability vs validity.";
+        });
+      }
+
+      function setupCronbachItems() {
+        const items = Array.from(byId("alpha-items").querySelectorAll("input[type='checkbox']"));
+        const valOut = byId("alpha-item-val");
+        const noteOut = byId("alpha-item-note");
+        const thermo = byId("alpha-thermo");
+
+        const n = 220;
+        const latent = Array.from({ length: n }, () => normalSample(0, 1));
+        const data = {
+          happy1: latent.map((v) => v + normalSample(0, 0.6)),
+          happy2: latent.map((v) => v + normalSample(0, 0.6)),
+          happy3: latent.map((v) => v + normalSample(0, 0.6)),
+          noise1: Array.from({ length: n }, () => normalSample(0, 1)),
+          noise2: Array.from({ length: n }, () => normalSample(0, 1))
+        };
+
+        function cronbachAlpha(matrix) {
+          const k = matrix.length;
+          if (k < 2) return 0;
+          const itemVars = matrix.map((arr) => variance(arr));
+          const totalScores = Array.from({ length: n }, (_, i) =>
+            matrix.reduce((s, arr) => s + arr[i], 0)
+          );
+          const totalVar = variance(totalScores);
+          return (k / (k - 1)) * (1 - itemVars.reduce((s, v) => s + v, 0) / totalVar);
+        }
+
+        function update() {
+          const selected = items.filter((item) => item.checked).map((item) => data[item.dataset.item]);
+          const alpha = selected.length ? cronbachAlpha(selected) : 0;
+          valOut.textContent = fmt(alpha, 2);
+          thermo.style.width = `${Math.round(clamp(alpha, 0, 1) * 100)}%`;
+          if (alpha >= 0.8) noteOut.textContent = "Good internal consistency.";
+          else if (alpha >= 0.7) noteOut.textContent = "Acceptable but could improve.";
+          else if (alpha >= 0.6) noteOut.textContent = "Borderline.";
+          else noteOut.textContent = "Low consistency.";
+        }
+
+        items.forEach((item) => item.addEventListener("change", update));
+        update();
+      }
+
+      function setupValidityBuilder() {
+        const selects = Array.from(byId("validity-builder").querySelectorAll("select"));
+        const convOut = byId("validity-conv");
+        const discOut = byId("validity-disc");
+        const noteOut = byId("validity-note");
+        const convBar = byId("validity-conv-bar");
+        const discBar = byId("validity-disc-bar");
+        const noteBar = byId("validity-note-bar");
+        const canvas = byId("validity-canvas");
+        const ctx = canvas.getContext("2d");
+
+        const baseLoadings = selects.map((select) => {
+          const type = select.dataset.type;
+          if (type === "happy") return { happy: 0.75, stress: 0.2 };
+          if (type === "stress") return { happy: 0.2, stress: 0.75 };
+          return { happy: 0.1, stress: 0.1 };
+        });
+
+        function draw() {
+          const padding = 40;
+          const w = canvas.width;
+          const h = canvas.height;
+          ctx.clearRect(0, 0, w, h);
+          drawAxes(ctx, w, h, padding);
+
+          let correct = 0;
+          let assigned = 0;
+          let wrong = 0;
+          selects.forEach((select, idx) => {
+            const choice = select.value;
+            if (!choice) return;
+            assigned += 1;
+            const type = select.dataset.type;
+            if (type === "noise") {
+              if (choice === "exclude") correct += 1;
+              else wrong += 1;
+            } else if ((choice === "happy" && type === "happy") || (choice === "stress" && type === "stress")) {
+              correct += 1;
+            } else {
+              wrong += 1;
+            }
+            const xVal = baseLoadings[idx].happy;
+            const yVal = baseLoadings[idx].stress;
+            const cx = padding + xVal * (w - 2 * padding);
+            const cy = h - padding - yVal * (h - 2 * padding);
+            let color = "#94a3b8";
+            if (choice === "happy") color = "#2563eb";
+            if (choice === "stress") color = "#f97316";
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          const convScore = assigned ? correct / assigned : 0;
+          const discScore = assigned ? 1 - wrong / assigned : 0;
+          const overall = (convScore + discScore) / 2;
+          convOut.textContent = fmt(convScore, 2);
+          discOut.textContent = fmt(discScore, 2);
+          convBar.style.width = `${Math.round(clamp(convScore, 0, 1) * 100)}%`;
+          discBar.style.width = `${Math.round(clamp(discScore, 0, 1) * 100)}%`;
+          noteBar.style.width = `${Math.round(clamp(overall, 0, 1) * 100)}%`;
+          if (assigned === 0) noteOut.textContent = "Assign items to evaluate validity.";
+          else if (overall >= 0.8) noteOut.textContent = "Strong evidence.";
+          else if (overall >= 0.6) noteOut.textContent = "Mixed evidence.";
+          else noteOut.textContent = "Weak evidence.";
+
+          ctx.fillStyle = "#0f172a";
+          ctx.font = "12px system-ui, sans-serif";
+          ctx.fillText("Correlation with Happiness", w - 200, h - 12);
+          ctx.fillText("Correlation with Stress", padding - 20, padding + 8);
+        }
+
+        selects.forEach((select) => select.addEventListener("change", draw));
+        draw();
+      }
+
+      function jacobiEigenvalues(matrix, iterations = 80) {
+        const n = matrix.length;
+        const a = matrix.map((row) => row.slice());
+        for (let iter = 0; iter < iterations; iter += 1) {
+          let p = 0;
+          let q = 1;
+          let max = 0;
+          for (let i = 0; i < n; i += 1) {
+            for (let j = i + 1; j < n; j += 1) {
+              const val = Math.abs(a[i][j]);
+              if (val > max) {
+                max = val;
+                p = i;
+                q = j;
+              }
+            }
+          }
+          if (max < 1e-6) break;
+          const phi = 0.5 * Math.atan2(2 * a[p][q], a[q][q] - a[p][p]);
+          const c = Math.cos(phi);
+          const s = Math.sin(phi);
+          const app = c * c * a[p][p] - 2 * s * c * a[p][q] + s * s * a[q][q];
+          const aqq = s * s * a[p][p] + 2 * s * c * a[p][q] + c * c * a[q][q];
+          a[p][p] = app;
+          a[q][q] = aqq;
+          a[p][q] = 0;
+          a[q][p] = 0;
+          for (let k = 0; k < n; k += 1) {
+            if (k !== p && k !== q) {
+              const aik = a[k][p];
+              const akq = a[k][q];
+              a[k][p] = c * aik - s * akq;
+              a[p][k] = a[k][p];
+              a[k][q] = s * aik + c * akq;
+              a[q][k] = a[k][q];
+            }
+          }
+        }
+        return a.map((row, i) => row[i]);
+      }
+
+      function setupEfaCaseStudy() {
+        const nInput = byId("efa-n");
+        const noiseInput = byId("efa-noise");
+        const runBtn = byId("efa-run");
+        const itemSelect = byId("efa-item");
+        const screeCanvas = byId("efa-scree");
+        const loadCanvas = byId("loading-canvas");
+        const screeCtx = screeCanvas.getContext("2d");
+        const loadCtx = loadCanvas.getContext("2d");
+        const table = byId("efa-table");
+        const noteOut = byId("efa-note");
+        let currentLoadings = [];
+
+        const items = [
+          { name: "Balance_1", factor: 1 },
+          { name: "Balance_2", factor: 1 },
+          { name: "Balance_3", factor: 1 },
+          { name: "Strain_1", factor: 2 },
+          { name: "Strain_2", factor: 2 },
+          { name: "Strain_3", factor: 2 }
+        ];
+
+        function simulate() {
+          const n = Number(nInput.value);
+          const noise = Number(noiseInput.value);
+          const f1 = Array.from({ length: n }, () => normalSample(0, 1));
+          const f2 = Array.from({ length: n }, () => normalSample(0, 1));
+          const data = items.map((item) => {
+            const primary = item.factor === 1 ? f1 : f2;
+            const cross = item.factor === 1 ? f2 : f1;
+            return primary.map((v, i) => 0.75 * v + 0.2 * cross[i] + normalSample(0, noise));
+          });
+
+          const loadings = items.map((item, idx) => ({
+            name: item.name,
+            f1: corr(data[idx], f1),
+            f2: corr(data[idx], f2)
+          }));
+
+          const corrMat = data.map((row, i) =>
+            data.map((col, j) => (i === j ? 1 : corr(row, col)))
+          );
+          const eig = jacobiEigenvalues(corrMat).sort((a, b) => b - a);
+
+          return { loadings, eig };
+        }
+
+        function drawScree(eig) {
+          const padding = 40;
+          const w = screeCanvas.width;
+          const h = screeCanvas.height;
+          screeCtx.clearRect(0, 0, w, h);
+          drawAxes(screeCtx, w, h, padding);
+          const maxEig = Math.max(...eig, 1);
+          const scaleX = (i) => padding + (i / (eig.length - 1)) * (w - 2 * padding);
+          const scaleY = (v) => h - padding - (v / (maxEig + 0.5)) * (h - 2 * padding);
+
+          screeCtx.strokeStyle = "#2563eb";
+          screeCtx.lineWidth = 2.5;
+          screeCtx.beginPath();
+          eig.forEach((v, i) => {
+            const x = scaleX(i);
+            const y = scaleY(v);
+            if (i === 0) screeCtx.moveTo(x, y);
+            else screeCtx.lineTo(x, y);
+          });
+          screeCtx.stroke();
+
+          screeCtx.fillStyle = "#2563eb";
+          eig.forEach((v, i) => {
+            const x = scaleX(i);
+            const y = scaleY(v);
+            screeCtx.beginPath();
+            screeCtx.arc(x, y, 3, 0, Math.PI * 2);
+            screeCtx.fill();
+          });
+
+          screeCtx.fillStyle = "#0f172a";
+          screeCtx.font = "12px system-ui, sans-serif";
+          screeCtx.fillText("Factor", w - 90, h - 12);
+          screeCtx.fillText("Eigenvalue", padding - 10, padding + 8);
+        }
+
+        function drawLoading(loadings, itemName) {
+          const target = loadings.find((l) => l.name === itemName) ?? loadings[0];
+          const padding = 40;
+          const w = loadCanvas.width;
+          const h = loadCanvas.height;
+          loadCtx.clearRect(0, 0, w, h);
+          drawAxes(loadCtx, w, h, padding);
+          const scale = (v) => padding + v * (w - 2 * padding);
+          const originX = padding;
+          const originY = h - padding;
+          const vecX = scale(Math.abs(target.f1));
+          const vecY = originY - Math.abs(target.f2) * (h - 2 * padding);
+
+          loadCtx.strokeStyle = "#2563eb";
+          loadCtx.lineWidth = 3;
+          loadCtx.beginPath();
+          loadCtx.moveTo(originX, originY);
+          loadCtx.lineTo(vecX, vecY);
+          loadCtx.stroke();
+
+          loadCtx.fillStyle = "#2563eb";
+          loadCtx.beginPath();
+          loadCtx.arc(vecX, vecY, 5, 0, Math.PI * 2);
+          loadCtx.fill();
+
+          loadCtx.fillStyle = "#0f172a";
+          loadCtx.font = "12px system-ui, sans-serif";
+          loadCtx.fillText("Factor 1", w - padding - 50, h - padding + 18);
+          loadCtx.fillText("Factor 2", padding - 20, padding + 10);
+        }
+
+        function update() {
+          const { loadings, eig } = simulate();
+          currentLoadings = loadings;
+          itemSelect.innerHTML = "";
+          loadings.forEach((l) => {
+            const opt = document.createElement("option");
+            opt.value = l.name;
+            opt.textContent = l.name;
+            itemSelect.appendChild(opt);
+          });
+          drawScree(eig);
+          drawLoading(loadings, itemSelect.value);
+
+          table.innerHTML = `
+            <thead>
+              <tr><th>Item</th><th>Factor 1</th><th>Factor 2</th><th>Note</th></tr>
+            </thead>
+            <tbody>
+              ${loadings.map((l) => {
+                const dominant = Math.abs(l.f1) >= Math.abs(l.f2) ? "F1" : "F2";
+                const good = Math.max(Math.abs(l.f1), Math.abs(l.f2)) >= 0.4 && Math.min(Math.abs(l.f1), Math.abs(l.f2)) < 0.3;
+                return `<tr>
+                  <td>${l.name}</td>
+                  <td>${fmt(l.f1, 2)}</td>
+                  <td>${fmt(l.f2, 2)}</td>
+                  <td>${good ? "Clean loading on " + dominant : "Cross-loading risk"}</td>
+                </tr>`;
+              }).join("")}
+            </tbody>
+          `;
+          noteOut.textContent = "Loadings above 0.4 on one factor and below 0.3 on the other are desirable.";
+
+        }
+
+        itemSelect.addEventListener("change", () => drawLoading(currentLoadings, itemSelect.value));
+        runBtn.addEventListener("click", update);
+        nInput.addEventListener("input", update);
+        noiseInput.addEventListener("input", update);
+        update();
+      }
+
+      function setupCfaCaseStudy() {
+        const crossInput = byId("cfa-cross");
+        const errorInput = byId("cfa-error");
+        const canvas = byId("cfa-canvas");
+        const ctx = canvas.getContext("2d");
+        const cfiOut = byId("cfa-cfi");
+        const rmseaOut = byId("cfa-rmsea");
+        const srmrOut = byId("cfa-srmr");
+        const noteOut = byId("cfa-note");
+
+        function draw() {
+          const cross = Number(crossInput.value);
+          const error = Number(errorInput.value);
+          const cfi = clamp(0.98 - cross * 0.6 - (error - 0.2) * 0.2, 0, 1);
+          const rmsea = clamp(0.02 + cross * 0.3 + (error - 0.2) * 0.15, 0, 1);
+          const srmr = clamp(0.02 + cross * 0.25 + (error - 0.2) * 0.1, 0, 1);
+
+          cfiOut.textContent = fmt(cfi, 2);
+          rmseaOut.textContent = fmt(rmsea, 2);
+          srmrOut.textContent = fmt(srmr, 2);
+          if (cfi > 0.95 && rmsea < 0.06 && srmr < 0.08) noteOut.textContent = "Strong fit.";
+          else if (cfi > 0.9 && rmsea < 0.08) noteOut.textContent = "Acceptable fit.";
+          else noteOut.textContent = "Weak fit (model may be misspecified).";
+
+          const padding = 40;
+          const w = canvas.width;
+          const h = canvas.height;
+          ctx.clearRect(0, 0, w, h);
+          drawAxes(ctx, w, h, padding);
+
+          const labels = ["B1", "B2", "B3", "S1", "S2", "S3"];
+          const maxVal = 1;
+          const barWidth = 18;
+          const gap = 16;
+          const groupGap = 24;
+          const scaleY = (v) => (v / maxVal) * (h - 2 * padding);
+
+          let x = padding + 20;
+          labels.forEach((label, i) => {
+            const primary = 0.75;
+            const crossVal = cross;
+            ctx.fillStyle = i < 3 ? "#2563eb" : "#10b981";
+            ctx.fillRect(x, h - padding - scaleY(primary), barWidth, scaleY(primary));
+            ctx.fillStyle = "#f97316";
+            ctx.fillRect(x + barWidth + 4, h - padding - scaleY(crossVal), barWidth, scaleY(crossVal));
+
+            ctx.fillStyle = "#0f172a";
+            ctx.font = "11px system-ui, sans-serif";
+            ctx.fillText(label, x, h - padding + 14);
+
+            x += barWidth * 2 + gap;
+            if (i === 2) x += groupGap;
+          });
+
+          ctx.fillStyle = "#0f172a";
+          ctx.font = "12px system-ui, sans-serif";
+          ctx.fillText("Items (B=Balance, S=Strain)", w - 220, h - 12);
+          ctx.fillText("Loading", padding - 20, padding + 8);
+          ctx.fillStyle = "#2563eb";
+          ctx.fillRect(padding + 8, padding + 8, 12, 6);
+          ctx.fillStyle = "#10b981";
+          ctx.fillRect(padding + 8, padding + 20, 12, 6);
+          ctx.fillStyle = "#f97316";
+          ctx.fillRect(padding + 8, padding + 32, 12, 6);
+          ctx.fillStyle = "#0f172a";
+          ctx.fillText("Primary loading (Balance)", padding + 26, padding + 14);
+          ctx.fillText("Primary loading (Strain)", padding + 26, padding + 26);
+          ctx.fillText("Cross-loading", padding + 26, padding + 38);
+        }
+
+        crossInput.addEventListener("input", draw);
+        errorInput.addEventListener("input", draw);
+        draw();
+      }
+
+      function setupSampling() {
+        const select = byId("sample-select");
+        const bestOut = byId("sample-best");
+        const riskOut = byId("sample-risk");
+        const noteOut = byId("sample-note");
+
+        const info = {
+          simple: {
+            best: "When you have a full sampling frame and want unbiased estimates.",
+            risk: "Nonresponse can still bias results.",
+            note: "Every unit has equal selection probability."
+          },
+          stratified: {
+            best: "When you need subgroup representation.",
+            risk: "Bad strata definitions can create bias.",
+            note: "Draw within strata and weight if needed."
+          },
+          cluster: {
+            best: "When populations are geographically dispersed.",
+            risk: "Clusters may be internally similar.",
+            note: "Cheaper but less precise."
+          },
+          convenience: {
+            best: "Exploratory or pilot studies.",
+            risk: "Strong selection bias.",
+            note: "Generalization is limited."
+          },
+          snowball: {
+            best: "Hard-to-reach populations.",
+            risk: "Network bias and homophily.",
+            note: "Document recruitment chains."
+          }
+        };
+
+        function update() {
+          const key = select.value;
+          bestOut.textContent = info[key].best;
+          riskOut.textContent = info[key].risk;
+          noteOut.textContent = info[key].note;
+        }
+
+        select.addEventListener("change", update);
+        update();
+      }
+
+      function setupAlpha() {
+        const kInput = byId("alpha-k");
+        const rInput = byId("alpha-r");
+        const valOut = byId("alpha-val");
+        const interpretOut = byId("alpha-interpret");
+
+        function update() {
+          const k = Number(kInput.value);
+          const r = Number(rInput.value);
+          const alpha = (k * r) / (1 + (k - 1) * r);
+          valOut.textContent = fmt(alpha, 2);
+          if (alpha >= 0.9) interpretOut.textContent = "Very high (check redundancy)";
+          else if (alpha >= 0.8) interpretOut.textContent = "Good";
+          else if (alpha >= 0.7) interpretOut.textContent = "Acceptable";
+          else interpretOut.textContent = "Needs improvement";
+        }
+
+        kInput.addEventListener("input", update);
+        rInput.addEventListener("input", update);
+        update();
+      }
+
+      function setupQuizzes() {
+        document.querySelectorAll(".quiz").forEach((quiz) => {
+          const correct = quiz.dataset.answer;
+          const button = quiz.querySelector(".check-btn");
+          const feedback = quiz.querySelector(".feedback");
+
+          button.addEventListener("click", () => {
+            const selected = quiz.querySelector("input:checked");
+            if (!selected) {
+              feedback.textContent = "Select an answer first.";
+              feedback.className = "feedback";
+              return;
+            }
+            if (selected.value === correct) {
+              feedback.textContent = "Correct. Nice work.";
+              feedback.className = "feedback correct";
+            } else {
+              feedback.textContent = "Not quite. Review the concept and try again.";
+              feedback.className = "feedback wrong";
+            }
+          });
+        });
+      }
+
+      function setupMiniChecks() {
+        document.querySelectorAll(".mini-check").forEach((check) => {
+          const correct = check.dataset.answer;
+          const button = check.querySelector(".check-btn");
+          const select = check.querySelector("select");
+          const feedback = check.querySelector(".feedback");
+
+          button.addEventListener("click", () => {
+            if (!select.value) {
+              feedback.textContent = "Select an option first.";
+              feedback.className = "feedback";
+              return;
+            }
+            if (select.value === correct) {
+              feedback.textContent = "Correct.";
+              feedback.className = "feedback correct";
+            } else {
+              feedback.textContent = "Not quite. Try again.";
+              feedback.className = "feedback wrong";
+            }
+          });
+        });
+      }
+
+      function setupNonresponseViz() {
+        const pInput = byId("bias-p");
+        const bInput = byId("bias-b");
+        const pLabel = byId("bias-p-label");
+        const bLabel = byId("bias-b-label");
+        const popOut = byId("bias-pop");
+        const sampleOut = byId("bias-sample");
+        const gapOut = byId("bias-gap");
+        const canvas = byId("bias-canvas");
+        const ctx = canvas.getContext("2d");
+
+        function simulate() {
+          const p = Number(pInput.value);
+          const bias = Number(bInput.value);
+          pLabel.textContent = fmt(p, 2);
+          bLabel.textContent = fmt(bias, 2);
+
+          const base = 0.5;
+          const p1 = clamp(base + bias, 0.05, 0.95);
+          const p0 = clamp(base - bias, 0.05, 0.95);
+          const n = 1000;
+          let popSum = 0;
+          let sampleSum = 0;
+          let sampleCount = 0;
+          for (let i = 0; i < n; i += 1) {
+            const y = Math.random() < p ? 1 : 0;
+            popSum += y;
+            const respProb = y === 1 ? p1 : p0;
+            if (Math.random() < respProb) {
+              sampleSum += y;
+              sampleCount += 1;
+            }
+          }
+          const popMean = popSum / n;
+          const sampleMean = sampleCount > 0 ? sampleSum / sampleCount : 0;
+          const gap = sampleMean - popMean;
+
+          popOut.textContent = fmt(popMean, 2);
+          sampleOut.textContent = fmt(sampleMean, 2);
+          gapOut.textContent = fmt(gap, 2);
+
+          const padding = 40;
+          const w = canvas.width;
+          const h = canvas.height;
+          ctx.clearRect(0, 0, w, h);
+          drawAxes(ctx, w, h, padding);
+
+          const maxVal = Math.max(popMean, sampleMean, 0.01);
+          const scaleY = (v) => (v / (maxVal + 0.2)) * (h - 2 * padding);
+          const barWidth = 160;
+
+          ctx.fillStyle = "#60a5fa";
+          ctx.fillRect(padding + 120, h - padding - scaleY(popMean), barWidth, scaleY(popMean));
+          ctx.fillStyle = "#f97316";
+          ctx.fillRect(padding + 360, h - padding - scaleY(sampleMean), barWidth, scaleY(sampleMean));
+
+          ctx.fillStyle = "#0f172a";
+          ctx.font = "12px system-ui, sans-serif";
+          ctx.fillText("Population", padding + 150, h - padding + 18);
+          ctx.fillText("Respondents", padding + 375, h - padding + 18);
+        }
+
+        pInput.addEventListener("input", simulate);
+        bInput.addEventListener("input", simulate);
+        simulate();
+      }
+
+      async function setupWebRBench() {
+        const output = byId("r-output");
+        const runBtn = byId("r-run");
+        const resetBtn = byId("r-reset");
+        const buildBtn = byId("r-build");
+        const codeArea = byId("r-code");
+        const canvas = byId("r-plot");
+        const ctx = canvas.getContext("2d");
+
+        const nInput = byId("r-n");
+        const kInput = byId("r-k");
+        const sdInput = byId("r-sd");
+
+        const defaultParams = {
+          n: 300,
+          k: 4,
+          sigma: 0.7
+        };
+
+        function buildCode() {
+          const n = Number(nInput.value);
+          const k = Number(kInput.value);
+          const sigma = Number(sdInput.value);
+          return `set.seed(55)
+n <- ${n}
+k <- ${k}
+sigma <- ${sigma}
+
+latent1 <- rnorm(n)
+latent2 <- rnorm(n)
+
+make_items <- function(latent, k, sigma) {
+  items <- sapply(1:k, function(i) latent + rnorm(n, 0, sigma))
+  items
+}
+
+items1 <- make_items(latent1, k, sigma)
+items2 <- make_items(latent2, k, sigma)
+items <- cbind(items1, items2)
+
+likert <- function(x) {
+  cut(x, breaks = 7, labels = 1:7)
+}
+
+df <- as.data.frame(apply(items, 2, likert))
+df <- as.data.frame(lapply(df, function(x) as.numeric(as.character(x))))
+
+cronbach <- function(mat) {
+  k <- ncol(mat)
+  item_var <- apply(mat, 2, var)
+  total_var <- var(rowSums(mat))
+  (k / (k - 1)) * (1 - sum(item_var) / total_var)
+}
+
+alpha1 <- cronbach(df[, 1:k])
+alpha2 <- cronbach(df[, (k + 1):(2 * k)])
+
+cat("Cronbach alpha factor 1:", round(alpha1, 2), "\\n")
+cat("Cronbach alpha factor 2:", round(alpha2, 2), "\\n")
+
+fa <- factanal(df, factors = 2, rotation = "varimax")
+print(fa$loadings, cutoff = 0.3)
+
+eig <- eigen(cor(df))$values
+par(mfrow = c(1, 2))
+plot(eig, type = "b", main = "Scree plot", xlab = "Factor", ylab = "Eigenvalue")
+barplot(colMeans(df), main = "Item means", ylab = "Mean response")`;
+        }
+
+        function reset() {
+          nInput.value = defaultParams.n;
+          kInput.value = defaultParams.k;
+          sdInput.value = defaultParams.sigma;
+          codeArea.value = buildCode();
+        }
+
+        function clearOutput() {
+          output.textContent = "";
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        let webRConsole = null;
+        try {
+          const { Console } = await import("https://webr.r-wasm.org/latest/webr.mjs");
+          webRConsole = new Console({
+            stdout: (line) => {
+              output.textContent += `${line}\n`;
+            },
+            stderr: (line) => {
+              output.textContent += `${line}\n`;
+            },
+            prompt: (line) => {
+              output.textContent += line;
+            },
+            canvasImage: (img) => {
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            },
+            canvasNewPage: () => {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+          });
+          await webRConsole.run();
+          await webRConsole.stdin("options(device=webr::canvas(450, 260))");
+          output.textContent = "webR is ready. Update parameters and run the code.";
+          runBtn.disabled = false;
+        } catch (err) {
+          output.textContent = `webR failed to load: ${err.message}`;
+        }
+
+        buildBtn.addEventListener("click", () => {
+          codeArea.value = buildCode();
+        });
+
+        resetBtn.addEventListener("click", () => {
+          reset();
+          clearOutput();
+          output.textContent = "Reset to defaults. Click Run R to execute.";
+        });
+
+        runBtn.addEventListener("click", async () => {
+          if (!webRConsole) return;
+          clearOutput();
+          await webRConsole.stdin(codeArea.value);
+        });
+
+        reset();
+      }
+
+      reorderSections();
+      setupTheoryCards();
+      setupViewSettings();
+      setupLatentConstruct();
+      setupScaleClassifier();
+      setupSamplingProb();
+      setupSamplingNonProb();
+      setupSampling();
+      setupReliabilityValidity();
+      setupCronbachItems();
+      setupAlpha();
+      setupValidityBuilder();
+      setupEfaCaseStudy();
+      setupCfaCaseStudy();
+      setupQuizzes();
+      setupMiniChecks();
+      setupNonresponseViz();
+      setupWebRBench();
+    </script>
+  </body>
+  </html>

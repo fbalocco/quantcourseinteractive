@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RDM Quant Interactive Modules</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --text: #1d1f23;
+        --muted: #5b6170;
+        --border: #e2e6ef;
+        --accent: #2b6de9;
+        --accent-2: #1f4fb1;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--accent-2);
+        text-decoration: underline;
+      }
+
+      .container {
+        max-width: min(1320px, 96vw);
+        margin: 0 auto;
+        padding: 32px 20px 60px;
+      }
+
+      header {
+        background: linear-gradient(135deg, #ecf1ff, #ffffff);
+        border-bottom: 1px solid var(--border);
+        padding: 24px 0;
+      }
+
+      .hero {
+        display: grid;
+        gap: 12px;
+      }
+
+      .tag {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .lead {
+        color: var(--muted);
+        max-width: 920px;
+      }
+
+      .byline {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px;
+        display: grid;
+        gap: 10px;
+        box-shadow: 0 8px 20px rgba(22, 33, 68, 0.06);
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .refs-grid {
+        display: grid;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .refs-group h4 {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .refs-group ul {
+        margin: 6px 0 0 18px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .notice {
+        margin-top: 24px;
+        padding: 14px 16px;
+        border: 1px dashed #b9c5ea;
+        background: #f0f4ff;
+        border-radius: 12px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      footer {
+        margin-top: 40px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container hero">
+        <span class="tag">RDM Quantitative Track</span>
+        <h1>Interactive Modules</h1>
+        <p class="byline">by Francesco Balocco</p>
+        <p class="lead">
+          Standalone interactive companions for each session deck. Each module includes
+          an explorable walkthrough, quizzes, a case study, and a webR test bench for
+          simulated data and guided analysis in R.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="grid">
+        <a class="card" href="session-1b-introduction.html">
+          <h3>Session 1B: Intro to Quantitative Research</h3>
+          <p>Probability, distributions, sampling, and confidence intervals.</p>
+        </a>
+        <a class="card" href="session-3-experiments.html">
+          <h3>Session 3: Experiments and Comparing Means</h3>
+          <p>Experimental design, t-tests, ANOVA, and assumptions.</p>
+        </a>
+        <a class="card" href="session-4a-archival-ols.html">
+          <h3>Session 4A: Archival Data and OLS</h3>
+          <p>Correlation, regression intuition, diagnostics, and controls.</p>
+        </a>
+        <a class="card" href="session-5a-advanced-regression.html">
+          <h3>Session 5A: Advanced Regression</h3>
+          <p>Nonlinearities, logit/probit, and panel data intuition.</p>
+        </a>
+        <a class="card" href="session-6a-survey-research.html">
+          <h3>Session 6A: Survey Research</h3>
+          <p>Sampling, reliability, validity, and factor analysis.</p>
+        </a>
+      </div>
+
+      <div class="notice">
+        Each module is fully self-contained. To use the R test benches you will need
+        internet access to load webR from the official CDN and a modern browser that
+        supports OffscreenCanvas for plotting.
+      </div>
+
+      <section class="card">
+        <h3>References and further reading</h3>
+        <p>Curated resources that support the interactive modules.</p>
+        <div class="refs-grid">
+          <div class="refs-group">
+            <h4>Session 1B: Intro to Quantitative Research</h4>
+            <ul>
+              <li><a href="https://www.openintro.org/book/os/" target="_blank" rel="noopener">OpenIntro Statistics (free textbook)</a></li>
+              <li><a href="https://openstax.org/books/introductory-statistics-2e/pages/1-introduction" target="_blank" rel="noopener">OpenStax Introductory Statistics</a></li>
+              <li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm" target="_blank" rel="noopener">NIST: Confidence limits for the mean</a></li>
+              <li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm" target="_blank" rel="noopener">NIST: Exploratory data analysis overview</a></li>
+            </ul>
+          </div>
+          <div class="refs-group">
+            <h4>Session 3: Experiments and Comparing Means</h4>
+            <ul>
+              <li><a href="https://hbr.org/2022/09/can-music-make-you-more-productive" target="_blank" rel="noopener">Harvard Business Review: Can music make you more productive?</a></li>
+              <li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener">NIST: Two-sample t-test for equal means</a></li>
+              <li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda354.htm" target="_blank" rel="noopener">NIST: One-factor ANOVA</a></li>
+              <li><a href="https://www.openintro.org/book/os/" target="_blank" rel="noopener">OpenIntro Statistics (experiments and inference)</a></li>
+            </ul>
+          </div>
+          <div class="refs-group">
+            <h4>Session 4A: Archival Data and OLS</h4>
+            <ul>
+              <li><a href="https://www.openintro.org/book/os/" target="_blank" rel="noopener">OpenIntro Statistics (correlation and regression)</a></li>
+              <li><a href="https://online.stat.psu.edu/stat501/book/export/html/910" target="_blank" rel="noopener">Penn State STAT 501: regression assumptions</a></li>
+              <li><a href="https://online.stat.psu.edu/stat501/book/export/html/985" target="_blank" rel="noopener">Penn State STAT 501: variance inflation factors</a></li>
+              <li><a href="https://www.itl.nist.gov/div898/handbook/pri/section2/pri24.htm" target="_blank" rel="noopener">NIST: residual analysis and diagnostics</a></li>
+            </ul>
+          </div>
+          <div class="refs-group">
+            <h4>Session 5A: Advanced Regression</h4>
+            <ul>
+              <li><a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/" target="_blank" rel="noopener">UCLA IDRE: interpreting odds ratios</a></li>
+              <li><a href="https://stats.oarc.ucla.edu/stata/examples/long/regression-models-for-categorical-and-limited-dependent-variableschapter-3-binary-outcomes-the-linear-probability-probit-and-logit-models/" target="_blank" rel="noopener">UCLA IDRE: logit vs probit overview</a></li>
+              <li><a href="https://libguides.princeton.edu/R-Panel" target="_blank" rel="noopener">Princeton Library: panel data in R</a></li>
+              <li><a href="https://www.openintro.org/book/os/" target="_blank" rel="noopener">OpenIntro Statistics (non-linear regression notes)</a></li>
+            </ul>
+          </div>
+          <div class="refs-group">
+            <h4>Session 6A: Survey Research</h4>
+            <ul>
+              <li><a href="https://openstax.org/books/introductory-statistics-2e/pages/1-6-sampling-experiment" target="_blank" rel="noopener">OpenStax: sampling methods</a></li>
+              <li><a href="https://www.pewresearch.org/2017/05/15/what-low-response-rates-mean-for-telephone-surveys/" target="_blank" rel="noopener">Pew Research Center: nonresponse and bias</a></li>
+              <li><a href="https://data.library.virginia.edu/using-and-interpreting-cronbachs-alpha/" target="_blank" rel="noopener">UVA Library: interpreting Cronbach alpha</a></li>
+              <li><a href="https://stats.oarc.ucla.edu/spss/seminars/introduction-to-factor-analysis/" target="_blank" rel="noopener">UCLA IDRE: factor analysis primer</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container">© 2026 Francesco Balocco.</footer>
+  </body>
+  </html>

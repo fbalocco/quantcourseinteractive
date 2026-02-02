@@ -1,0 +1,2098 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Session 1B - Introduction to Quantitative Research</title>
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["$$", "$$"]] }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f8fc;
+        --card: #ffffff;
+        --text: #1c1f24;
+        --muted: #5d6473;
+        --border: #e3e7f1;
+        --accent: #2b6de9;
+        --accent-2: #1f4fb1;
+        --success: #1c7c54;
+        --warning: #d97706;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.6;
+        padding-top: 70px;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--accent-2);
+        text-decoration: underline;
+      }
+
+      header {
+        background: linear-gradient(135deg, #eaf0ff, #ffffff);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .container {
+        max-width: min(1320px, 96vw);
+        margin: 0 auto;
+        padding: 24px 20px 60px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 12px;
+        padding: 28px 0 18px;
+      }
+
+      .breadcrumbs {
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: 32px;
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 920px;
+      }
+
+      .section {
+        margin-top: 28px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 12px 24px rgba(24, 34, 72, 0.06);
+      }
+
+      .card h3 {
+        margin-top: 0;
+      }
+
+      .grid-2 {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .tag {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .pill {
+        display: inline-block;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 12px;
+        color: var(--muted);
+        background: #f2f4fa;
+      }
+
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 56px;
+        background: #ffffff;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 0 16px;
+        z-index: 1000;
+      }
+
+      .topbar-link {
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .topbar-progress {
+        flex: 1;
+        display: grid;
+        gap: 4px;
+      }
+
+      .progress-track {
+        height: 6px;
+        background: #e5e7eb;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: var(--accent);
+        transition: width 0.2s ease;
+      }
+
+      .progress-text {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .settings-panel {
+        position: fixed;
+        top: 64px;
+        right: 16px;
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 12px;
+        box-shadow: 0 10px 24px rgba(24, 34, 72, 0.12);
+        z-index: 1001;
+        display: none;
+      }
+
+      .settings-panel.open {
+        display: grid;
+        gap: 8px;
+      }
+
+      .settings-title {
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      .controls {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .control-row {
+        display: grid;
+        gap: 6px;
+      }
+
+      label {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      input[type="range"],
+      input[type="number"],
+      select,
+      textarea {
+        width: 100%;
+      }
+
+      .btn {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .btn.secondary {
+        background: #e9eefc;
+        color: var(--accent-2);
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .stats {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        margin-top: 12px;
+      }
+
+      .stat {
+        background: #f5f7ff;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 13px;
+      }
+
+      .bar-chart {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .bar {
+        height: 18px;
+        border-radius: 6px;
+        background: #b6c7f5;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .bar span {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: #2b6de9;
+      }
+
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      canvas {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #fbfcff;
+      }
+
+      .quiz {
+        display: grid;
+        gap: 10px;
+      }
+
+      .quiz label {
+        font-size: 14px;
+        color: var(--text);
+      }
+
+      .feedback {
+        font-size: 13px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: #f5f7ff;
+        color: var(--muted);
+      }
+
+      .feedback.correct {
+        background: #e7f6ee;
+        color: var(--success);
+      }
+
+      .feedback.wrong {
+        background: #fff4e5;
+        color: var(--warning);
+      }
+
+      .bench {
+        display: grid;
+        gap: 12px;
+      }
+
+      .bench textarea {
+        min-height: 180px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .bench-output {
+        display: grid;
+        gap: 12px;
+      }
+
+      pre {
+        margin: 0;
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 12px;
+        border-radius: 12px;
+        min-height: 140px;
+        overflow-x: auto;
+        font-size: 12px;
+      }
+
+      ul {
+        margin: 0 0 0 18px;
+      }
+
+      .callout {
+        border-left: 4px solid #9bb8ff;
+        padding-left: 12px;
+        color: var(--muted);
+      }
+
+      .topic-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .topic-card {
+        background: #fdfdff;
+        border: 1px dashed #d8e1f6;
+        border-radius: 12px;
+        padding: 14px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .topic-card h4 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .card-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: minmax(320px, 1.15fr) 2.15fr;
+        align-items: start;
+      }
+
+      .card-left {
+        display: grid;
+        gap: 8px;
+      }
+
+      .card-right {
+        display: grid;
+        gap: 12px;
+      }
+
+      /* In single-card view, let theory and practice scroll independently. */
+      .view-mode-single .card-left,
+      .view-mode-single .card-right {
+        max-height: var(--split-pane-height, 70vh);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-gutter: stable;
+        padding-right: 6px;
+      }
+
+      /* In all-cards view, keep theory visible while the page scrolls. */
+      @media (min-width: 901px) {
+        .view-mode-all .topic-card .card-left {
+          position: sticky;
+          top: 72px;
+        }
+      }
+
+      .theory {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .exercise-intro {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      footer {
+        margin-top: 32px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 900px) {
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .topic-card ul {
+        margin: 0 0 0 18px;
+      }
+
+      .topic-figure {
+        margin-top: 6px;
+        background: #f5f7ff;
+        border: 1px solid #e1e7f8;
+        border-radius: 10px;
+        padding: 8px;
+        display: grid;
+        justify-items: center;
+      }
+
+      .topic-figure svg {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .topic-note {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .mini-check {
+        display: grid;
+        gap: 6px;
+        margin-top: 8px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #e1e7f8;
+        background: #f6f8ff;
+      }
+
+      .mini-check label {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .mini-check select {
+        padding: 6px 8px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: #fff;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <a class="topbar-link" href="index.html">All modules</a>
+      <div class="topbar-progress">
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <div class="progress-text" id="progress-text">Cards</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn secondary" id="prev-card" type="button">Prev</button>
+        <button class="btn secondary" id="next-card" type="button">Next</button>
+        <button class="btn" id="settings-btn" type="button">Settings</button>
+      </div>
+    </div>
+    <div class="settings-panel" id="settings-panel">
+      <div class="settings-title">View settings</div>
+      <label><input type="radio" name="view-mode" value="all"> Show all cards</label>
+      <label><input type="radio" name="view-mode" value="single"> Card-by-card</label>
+    </div>
+    <header>
+      <div class="container hero">
+        <div class="breadcrumbs"><a href="index.html">All modules</a> / Session 1B</div>
+        <span class="tag">RDM Quantitative Track</span>
+        <h1>Introduction to Quantitative Research</h1>
+        <p>
+          Build intuition about probability, distributions, sampling, and confidence intervals.
+          This module connects basic statistical ideas to real research questions and prepares you
+          for testing hypotheses later in the course.
+        </p>
+        <div class="pill">Session 1B - 6 Feb 2024</div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section card">
+        <h3>Learning goals</h3>
+        <ul>
+          <li>Explain probability and relate it to long-run frequency.</li>
+          <li>Distinguish discrete and continuous distributions.</li>
+          <li>Compute and interpret sample mean and variability.</li>
+          <li>Understand confidence intervals as a tool for uncertainty.</li>
+          <li>Translate a research question into an empirical question.</li>
+        </ul>
+      </section>
+
+      <section class="section card">
+        <h3>Syllabus walkthrough (slide order)</h3>
+        <p class="small">
+          This section follows the slide sequence but merges items where requested.
+        </p>
+        <ol class="topic-list">
+          <li class="topic-card">
+            <h4>1. Probability: definition and frequency intuition</h4>
+            <p class="small">
+              Choose the favorable outcome (heads or tails) and simulate coin tosses.
+              Track favorable outcomes over total outcomes and watch the probability stabilize.
+            </p>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Favorable outcome</label>
+                <select id="coin-choice">
+                  <option value="heads">Heads</option>
+                  <option value="tails">Tails</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label>Batch size (N)</label>
+                <input id="coin-steps" type="number" min="1" max="500" step="1" value="20">
+              </div>
+            </div>
+            <div class="controls">
+              <button class="btn" id="coin-step" type="button">Toss 1</button>
+              <button class="btn secondary" id="coin-batch" type="button">Toss N</button>
+              <button class="btn secondary" id="coin-reset" type="button">Reset</button>
+            </div>
+            <canvas id="coin-chart" width="820" height="220" aria-label="Coin toss probability chart"></canvas>
+            <div class="stats">
+              <div class="stat">Favorable outcomes: <span id="coin-fav">0</span></div>
+              <div class="stat">Total tosses: <span id="coin-total">0</span></div>
+              <div class="stat">Estimated probability: <span id="coin-prob">-</span></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: as tosses increase, the estimated probability should...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Approach the true probability</option>
+                <option value="b">Move randomly without settling</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>2. Distributions overview (discrete vs continuous)</h4>
+            <p class="small">
+              Classify each variable as discrete or continuous. The Probability Mass Function (PMF)
+              applies to discrete outcomes.
+            </p>
+            <div class="grid-2">
+              <div class="control-row">
+                <label>Number of siblings</label>
+                <select class="var-select" data-answer="discrete">
+                  <option value="">Select type</option>
+                  <option value="discrete">Discrete</option>
+                  <option value="continuous">Continuous</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label>Height in centimeters</label>
+                <select class="var-select" data-answer="continuous">
+                  <option value="">Select type</option>
+                  <option value="discrete">Discrete</option>
+                  <option value="continuous">Continuous</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label>Number of emails received today</label>
+                <select class="var-select" data-answer="discrete">
+                  <option value="">Select type</option>
+                  <option value="discrete">Discrete</option>
+                  <option value="continuous">Continuous</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label>Time to finish a quiz (seconds)</label>
+                <select class="var-select" data-answer="continuous">
+                  <option value="">Select type</option>
+                  <option value="discrete">Discrete</option>
+                  <option value="continuous">Continuous</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label>Likert rating (1-7)</label>
+                <select class="var-select" data-answer="discrete">
+                  <option value="">Select type</option>
+                  <option value="discrete">Discrete</option>
+                  <option value="continuous">Continuous</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label>Average heart rate (bpm)</label>
+                <select class="var-select" data-answer="continuous">
+                  <option value="">Select type</option>
+                  <option value="discrete">Discrete</option>
+                  <option value="continuous">Continuous</option>
+                </select>
+              </div>
+            </div>
+            <div class="controls">
+              <button class="btn secondary" id="var-check" type="button">Check answers</button>
+              <div class="feedback" id="var-feedback" aria-live="polite"></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: the Probability Mass Function (PMF) is used for...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Discrete outcomes</option>
+                <option value="b">Continuous outcomes</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>3. Discrete distributions: PMF and CDF (dice)</h4>
+            <p class="small">
+              Simulate dice rolls to build the Probability Mass Function (PMF) and CDF.
+              Move x to inspect f(x), F(x), and 1 - F(x).
+            </p>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Selected x: <strong id="dice-x-label">3</strong></label>
+                <input id="dice-x" type="range" min="1" max="6" step="1" value="3">
+              </div>
+              <div class="control-row">
+                <label>Batch size (N)</label>
+                <input id="dice-steps" type="number" min="1" max="500" step="1" value="20">
+              </div>
+            </div>
+            <div class="controls">
+              <button class="btn" id="dice-roll-one" type="button">Roll 1</button>
+              <button class="btn secondary" id="dice-roll-n" type="button">Roll N</button>
+              <button class="btn secondary" id="dice-reset" type="button">Reset</button>
+            </div>
+            <canvas id="dice-canvas" width="820" height="220" aria-label="Dice PMF chart"></canvas>
+            <div class="stats">
+              <div class="stat">Total rolls: <span id="dice-total">0</span></div>
+              <div class="stat">P(X = x): <span id="dice-px">-</span></div>
+              <div class="stat">F(x): <span id="dice-cdf">-</span></div>
+              <div class="stat">1 - F(x): <span id="dice-ccdf">-</span></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: for a fair die, P(X = 6) equals...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">1/6</option>
+                <option value="b">1/2</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: for a fair die, F(4) = P(X ≤ 4) equals...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">4/6</option>
+                <option value="b">2/6</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>4. Continuous distributions: PDF and CDF (height)</h4>
+            <p class="small">
+              Assume height is normally distributed with mean 170 cm and sd 10 cm.
+              Move x to see the shaded area under the curve.
+            </p>
+            <div class="controls">
+              <div class="control-row">
+                <label>Height x (cm): <strong id="height-x-label">170</strong></label>
+                <input id="height-x" type="range" min="140" max="200" step="1" value="170">
+              </div>
+            </div>
+            <canvas id="height-canvas" width="820" height="220" aria-label="Height PDF and CDF shading"></canvas>
+            <div class="stats">
+              <div class="stat">P(X ≤ x): <span id="height-cdf">-</span></div>
+              <div class="stat">P(X ≥ x): <span id="height-ccdf">-</span></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: for continuous X, P(X = x*) equals...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">0</option>
+                <option value="b">The PDF value</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: P(a ≤ X ≤ b) = F(b) - F(a) is...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">True</option>
+                <option value="b">False</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>5. Sampling from a normal distribution (PDF vs CDF)</h4>
+            <p class="small">
+              We draw a random sample and display a histogram (approximating the PDF)
+              and the empirical CDF side by side. As n grows, both stabilize.
+            </p>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Sample size (n)</label>
+                <input id="sample-n" type="range" min="20" max="5000" step="50" value="200">
+              </div>
+              <div class="control-row">
+                <label>Mean (mu)</label>
+                <input id="sample-mu" type="number" min="140" max="200" step="1" value="170">
+              </div>
+              <div class="control-row">
+                <label>Std dev (sigma)</label>
+                <input id="sample-sd" type="number" min="5" max="25" step="1" value="10">
+              </div>
+              <div class="control-row">
+                <label>&nbsp;</label>
+                <button class="btn" id="sample-run" type="button">Resample</button>
+              </div>
+            </div>
+            <div class="grid-2">
+              <canvas id="sample-hist" width="400" height="220" aria-label="Sample histogram"></canvas>
+              <canvas id="sample-cdf" width="400" height="220" aria-label="Empirical CDF"></canvas>
+            </div>
+            <div class="stats">
+              <div class="stat">Sample mean: <span id="sample-mean">-</span></div>
+              <div class="stat">Sample sd: <span id="sample-sd-out">-</span></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>6. Mean and variance (shape of distributions)</h4>
+            <p class="small">
+              Adjust the mean and variance and observe how the distribution reshapes.
+              Toggle between continuous normal and a discrete approximation.
+            </p>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Mean (mu): <strong id="mv-mean-label">0.0</strong></label>
+                <input id="mv-mean" type="range" min="-3" max="3" step="0.2" value="0">
+              </div>
+              <div class="control-row">
+                <label>Variance: <strong id="mv-var-label">1.0</strong></label>
+                <input id="mv-var" type="range" min="0.4" max="4" step="0.2" value="1">
+              </div>
+              <div class="control-row">
+                <label>Mode</label>
+                <select id="mv-mode">
+                  <option value="continuous">Continuous (Normal PDF)</option>
+                  <option value="discrete">Discrete (Normal PMF)</option>
+                </select>
+              </div>
+              <div class="control-row">
+                <label>Std dev (sqrt variance): <strong id="mv-sd-label">1.00</strong></label>
+              </div>
+            </div>
+            <canvas id="mv-canvas" width="820" height="220" aria-label="Mean and variance plot"></canvas>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: expected value is another name for...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Mean</option>
+                <option value="b">Variance</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: standard deviation is the...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Square root of variance</option>
+                <option value="b">Square of the mean</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>7. Sample moments and the sampling distribution of the mean</h4>
+            <p class="small">
+              Sample moments can differ from population moments. Draw one sample and inspect its mean
+              and standard deviation visually.
+            </p>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Sample size (n): <strong id="mean-n-label">30</strong></label>
+                <input id="mean-n" type="range" min="5" max="5000" step="50" value="50">
+              </div>
+              <div class="control-row">
+                <label>Population mean</label>
+                <input id="mean-mu" type="number" min="-3" max="3" step="0.2" value="0">
+              </div>
+              <div class="control-row">
+                <label>Population sd</label>
+                <input id="mean-sd" type="number" min="0.5" max="3" step="0.1" value="1">
+              </div>
+              <div class="control-row">
+                <label>&nbsp;</label>
+                <button class="btn" id="mean-run" type="button">Resimulate</button>
+              </div>
+            </div>
+            <canvas id="mean-canvas" width="820" height="220" aria-label="Sample histogram with mean and sd"></canvas>
+            <div class="stats">
+              <div class="stat">Sample mean: <span id="mean-of-means">-</span></div>
+              <div class="stat">Sample sd: <span id="mean-sd-means">-</span></div>
+              <div class="stat">Mean ± sd: <span id="mean-se">-</span></div>
+              <div class="stat">Theoretical mean: <span id="mean-theory">-</span></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: sample variance uses n - 1 to...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Reduce bias in estimation</option>
+                <option value="b">Increase the mean</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: larger n usually makes sample moments...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Closer to population values</option>
+                <option value="b">More variable</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </li>
+          <li class="topic-card">
+            <h4>8. Sampling uncertainty, confidence intervals, and visual tests</h4>
+            <p class="small">
+              Random samples can yield different means. Confidence intervals summarize this uncertainty.
+              Explore how CI width changes with n and variance.
+            </p>
+            <div class="controls grid-2">
+              <div class="control-row">
+                <label>Sample size</label>
+                <input id="ci-n" type="range" min="10" max="200" step="5" value="40">
+                <span class="small">n = <strong id="ci-n-label">40</strong></span>
+              </div>
+              <div class="control-row">
+                <label>Standard deviation (sigma)</label>
+                <input id="ci-sd" type="range" min="0.5" max="5" step="0.5" value="2">
+                <span class="small">sigma = <strong id="ci-sd-label">2.0</strong></span>
+              </div>
+              <div class="control-row">
+                <label>True mean</label>
+                <input id="ci-mu" type="number" min="0" max="20" step="0.5" value="10">
+              </div>
+              <div class="control-row">
+                <label>&nbsp;</label>
+                <button class="btn" id="ci-run" type="button">Draw sample</button>
+              </div>
+            </div>
+            <canvas id="ci-canvas" width="820" height="180" aria-label="Confidence interval plot"></canvas>
+            <div class="stats">
+              <div class="stat">Sample mean: <span id="ci-mean">-</span></div>
+              <div class="stat">95% CI: <span id="ci-range">-</span></div>
+              <div class="stat">Contains true mean: <span id="ci-hit">-</span></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: two random samples can have different means even if...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">They come from the same population</option>
+                <option value="b">They are perfectly identical</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: a 95% CI means that in repeated samples...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">95% of such intervals contain the true mean</option>
+                <option value="b">There is 95% chance this interval is correct</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: increasing n typically makes CI width...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">Smaller</option>
+                <option value="b">Larger</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+            <div class="mini-check" data-answer="a">
+              <label>Quick check: non-overlapping CIs usually suggest...</label>
+              <select>
+                <option value="">Choose an answer</option>
+                <option value="a">A likely difference between groups</option>
+                <option value="b">No difference at all</option>
+              </select>
+              <button class="btn secondary check-btn" type="button">Check</button>
+              <div class="feedback" aria-live="polite"></div>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section" id="quick-check">
+        <div class="card">
+          <h3>Quick check</h3>
+          <div class="quiz" data-answer="b">
+            <strong>1) What does a 95% confidence interval mean?</strong>
+            <label><input type="radio" name="q1" value="a"> There is a 95% chance the true mean is inside this specific interval.</label>
+            <label><input type="radio" name="q1" value="b"> In repeated samples, 95% of such intervals would contain the true mean.</label>
+            <label><input type="radio" name="q1" value="c"> The sample mean is 95% accurate.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="c">
+            <strong>2) If n increases while sigma stays constant, the CI width usually:</strong>
+            <label><input type="radio" name="q2" value="a"> Increases.</label>
+            <label><input type="radio" name="q2" value="b"> Stays the same.</label>
+            <label><input type="radio" name="q2" value="c"> Decreases.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz" data-answer="a">
+            <strong>3) A probability mass function (PMF) is used for:</strong>
+            <label><input type="radio" name="q3" value="a"> Discrete outcomes.</label>
+            <label><input type="radio" name="q3" value="b"> Continuous outcomes.</label>
+            <label><input type="radio" name="q3" value="c"> Only normally distributed data.</label>
+            <button class="btn secondary check-btn">Check</button>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section card" id="case-study">
+        <h3>R case study: Chatbot support and response times</h3>
+        <p>
+          A firm introduces an AI chatbot to handle first-line support. You want to describe
+          whether response times improve without making a strong causal claim yet. You collect
+          response times (in minutes) from 60 conversations before and 60 after the launch.
+        </p>
+        <ul>
+          <li>Compute the sample mean and standard deviation for each period.</li>
+          <li>Use 95% confidence intervals to summarize uncertainty.</li>
+          <li>Translate the research question into an empirical question:
+            "Are the response times before and after sampled from the same distribution?"</li>
+        </ul>
+        <p class="small">
+          This module focuses on descriptive inference. Formal tests (t-tests) come next session.
+        </p>
+      </section>
+
+      <section class="section card" id="r-section">
+        <h3>Interactive R test bench: sampling and confidence intervals</h3>
+        <p class="callout">
+          Simulate two groups of response times and inspect the sample means and confidence intervals.
+          Adjust the parameters and run the R code directly in your browser.
+        </p>
+        <ul>
+          <li>Run the default parameters and compare the two confidence intervals.</li>
+          <li>Increase the sample size to observe narrower intervals.</li>
+          <li>Increase sigma to see how variability widens the interval.</li>
+          <li>Check whether interval overlap changes as the effect size changes.</li>
+        </ul>
+        <div class="bench" data-bench="ci">
+          <div class="grid-2">
+            <div class="control-row">
+              <label>Group size (per group)</label>
+              <input id="r-n" type="number" min="10" max="300" step="5" value="60">
+            </div>
+            <div class="control-row">
+              <label>Mean before (mu_a)</label>
+              <input id="r-mu-a" type="number" min="1" max="30" step="0.5" value="8">
+            </div>
+            <div class="control-row">
+              <label>Mean after (mu_b)</label>
+              <input id="r-mu-b" type="number" min="1" max="30" step="0.5" value="6">
+            </div>
+            <div class="control-row">
+              <label>Standard deviation (sigma)</label>
+              <input id="r-sd" type="number" min="0.5" max="8" step="0.5" value="2">
+            </div>
+          </div>
+          <div class="controls">
+            <button class="btn secondary" id="r-build">Update R code</button>
+          </div>
+          <textarea id="r-code" spellcheck="false"></textarea>
+          <div class="controls">
+            <button class="btn" id="r-run" disabled>Run R</button>
+            <button class="btn secondary" id="r-reset">Reset</button>
+          </div>
+          <div class="bench-output">
+            <pre id="r-output">Loading webR, please wait...</pre>
+            <canvas id="r-plot" width="900" height="520"></canvas>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <footer class="container">© 2026 Francesco Balocco.</footer>
+
+    <script type="module">
+      const byId = (id) => document.getElementById(id);
+
+      function fmt(num, digits = 2) {
+        return Number(num).toFixed(digits);
+      }
+
+      function typesetMath(el) {
+        if (window.MathJax && window.MathJax.typesetPromise) {
+          window.MathJax.typesetPromise(el ? [el] : undefined);
+        }
+      }
+
+      function drawAxes(ctx, width, height, padding) {
+        ctx.strokeStyle = "#cbd5f6";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(padding, height - padding);
+        ctx.lineTo(width - padding, height - padding);
+        ctx.moveTo(padding, height - padding);
+        ctx.lineTo(padding, padding);
+        ctx.stroke();
+      }
+
+      function setupViewSettings() {
+        const cards = Array.from(
+          document.querySelectorAll(".topic-card, section.card, section#quick-check")
+        );
+        if (!cards.length) return;
+        const crumbEl = document.querySelector(".breadcrumbs");
+        const crumbText = crumbEl ? crumbEl.textContent : "";
+        const hasSlash = crumbText.indexOf("/") !== -1;
+        const sessionLabel = hasSlash ? crumbText.split("/").pop().trim() : crumbText.trim();
+        const headingEl = document.querySelector("header h1");
+        const sessionHeading = headingEl && headingEl.textContent ? headingEl.textContent.trim() : "";
+        const sessionTitle = [sessionLabel, sessionHeading].filter(Boolean).join(" - ");
+        const sessionPrefix = sessionTitle ? `${sessionTitle}. ` : "";
+        const header = document.querySelector("header");
+        const progressBar = byId("progress-bar");
+        const progressText = byId("progress-text");
+        const prevBtn = byId("prev-card");
+        const nextBtn = byId("next-card");
+        const settingsBtn = byId("settings-btn");
+        const panel = byId("settings-panel");
+        const modeInputs = Array.from(document.querySelectorAll("input[name='view-mode']"));
+        let index = 0;
+        const total = cards.length;
+
+        function updateSplitPaneHeight() {
+          if (!document.body.classList.contains("view-mode-single")) return;
+          const topbar = document.querySelector(".topbar");
+          const topbarH = topbar ? topbar.getBoundingClientRect().height : 0;
+          const h = Math.max(320, window.innerHeight - topbarH - 140);
+          document.documentElement.style.setProperty("--split-pane-height", `${h}px`);
+        }
+
+        function setMode(mode) {
+          localStorage.setItem("viewMode", mode);
+          modeInputs.forEach((input) => {
+            input.checked = input.value === mode;
+          });
+          document.body.classList.toggle("view-mode-single", mode === "single");
+          document.body.classList.toggle("view-mode-all", mode === "all");
+          updateSplitPaneHeight();
+          update();
+        }
+
+        function update() {
+          const checkedInput = modeInputs.find((input) => input.checked);
+          const mode = checkedInput ? checkedInput.value : "all";
+          cards.forEach((card, i) => {
+            const visible = mode === "all" || i === index;
+            card.style.display = visible ? "" : "none";
+          });
+          prevBtn.disabled = mode === "all" || index === 0;
+          nextBtn.disabled = mode === "all" || index === total - 1;
+          const progress = mode === "all" ? 100 : ((index + 1) / total) * 100;
+          progressBar.style.width = `${progress}%`;
+          progressText.textContent =
+            mode === "all"
+              ? `${sessionPrefix}All cards (${total})`
+              : `${sessionPrefix}Card ${index + 1} of ${total}`;
+          if (header) {
+            header.style.display = mode === "all" || index === 0 ? "" : "none";
+          }
+          updateSplitPaneHeight();
+        }
+
+        prevBtn.addEventListener("click", () => {
+          index = Math.max(0, index - 1);
+          update();
+        });
+        nextBtn.addEventListener("click", () => {
+          index = Math.min(total - 1, index + 1);
+          update();
+        });
+        settingsBtn.addEventListener("click", () => {
+          panel.classList.toggle("open");
+        });
+        document.addEventListener("click", (event) => {
+          if (!panel.contains(event.target) && event.target !== settingsBtn) {
+            panel.classList.remove("open");
+          }
+        });
+        modeInputs.forEach((input) => input.addEventListener("change", () => setMode(input.value)));
+        window.addEventListener("resize", updateSplitPaneHeight);
+
+        const savedMode = localStorage.getItem("viewMode") || "all";
+        setMode(savedMode);
+      }
+
+      function reorderSections() {
+        const main = document.querySelector("main");
+        const quick = byId("quick-check");
+        const caseCard = buildCaseStudyCard();
+        if (caseCard) main.appendChild(caseCard);
+        if (quick) main.appendChild(quick);
+      }
+
+      function buildCaseStudyCard() {
+        const caseSection = byId("case-study");
+        const rSection = byId("r-section");
+        if (!caseSection || !rSection) return null;
+        const card = document.createElement("section");
+        card.className = "section card";
+        card.id = "case-study-card";
+        const grid = document.createElement("div");
+        grid.className = "card-grid";
+        const left = document.createElement("div");
+        left.className = "card-left";
+        const right = document.createElement("div");
+        right.className = "card-right";
+
+        const title = caseSection.querySelector("h3");
+        if (title) left.appendChild(title);
+        Array.from(caseSection.children).forEach((child) => {
+          if (child !== title) left.appendChild(child);
+        });
+
+        const intro = document.createElement("p");
+        intro.className = "exercise-intro";
+        intro.textContent = "How to use: adjust parameters, update the R code, then run it to see the outputs.";
+        right.appendChild(intro);
+        Array.from(rSection.children).forEach((child) => {
+          if (child.tagName !== "H3") right.appendChild(child);
+        });
+
+        grid.appendChild(left);
+        grid.appendChild(right);
+        card.appendChild(grid);
+        caseSection.remove();
+        rSection.remove();
+        return card;
+      }
+
+      function setupTheoryCards() {
+        const list = document.querySelector(".topic-list");
+        if (!list) return;
+        const section = list.closest("section");
+        if (section) {
+          const heading = section.querySelector("h3");
+          const note = section.querySelector(":scope > p.small");
+          if (heading) heading.remove();
+          if (note) note.remove();
+          section.classList.remove("card");
+        }
+
+        const theory = [
+          "Probability can be understood as long-run relative frequency in repeated identical trials: as \\(n\\) grows, \\(\\hat{p}=\\frac{1}{n}\\sum_{i=1}^n I(A_i)\\) stabilizes (law of large numbers). In short runs it can fluctuate a lot—so don’t confuse early streaks with “real” changes in probability.",
+          "Start by deciding whether your variable is <em>discrete</em> or <em>continuous</em>. Discrete: a PMF \\(p(x)=P(X=x)\\) and probabilities add up (sums). Continuous: a PDF \\(f(x)\\) is a <em>density</em>, not a probability; probabilities are <em>areas</em>, e.g. \\(P(a\\le X\\le b)=\\int_a^b f(x)\\,dx\\). For continuous variables, \\(P(X=x)=0\\) for any single value.",
+          "The cumulative distribution function (CDF) collects probability up to a point. Discrete: \\(F(x)=P(X\\le x)=\\sum_{k\\le x} p(k)\\). Tail probabilities use complements, e.g. \\(P(X>x)=1-F(x)\\).",
+          "Continuous CDFs are integrals of the density: \\(F(x)=\\int_{-\\infty}^x f(t)\\,dt\\). Interval probabilities are differences in the CDF: \\(P(a\\le X\\le b)=F(b)-F(a)\\).",
+          "Normal distributions are a common model for measurement-like variables: \\(X\\sim\\mathcal{N}(\\mu,\\sigma^2)\\). Standardization \\(Z=(X-\\mu)/\\sigma\\) converts any normal to the standard normal (mean 0, sd 1), so you can read probabilities from the same CDF \\(\\Phi\\).",
+          "Mean and variance summarize “center” and “spread”. Sample mean: \\(\\bar{x}=\\frac{1}{n}\\sum x_i\\). Sample variance: \\(s^2=\\frac{1}{n-1}\\sum (x_i-\\bar{x})^2\\) (note the \\(n-1\\), which makes it unbiased under i.i.d. sampling). Changing \\(\\mu\\) shifts a distribution; changing \\(\\sigma\\) stretches it.",
+          "A statistic varies across samples. For i.i.d. data, the sampling distribution of \\(\\bar{X}\\) has \\(E[\\bar{X}]=\\mu\\) and \\(\\mathrm{Var}(\\bar{X})=\\sigma^2/n\\); by the CLT, \\(\\bar{X}\\) becomes approximately normal as \\(n\\) grows (even if the raw data are not perfectly normal). The standard error is \\(SE(\\bar{X})=\\sigma/\\sqrt{n}\\) (estimated by \\(s/\\sqrt{n}\\)).",
+          "A 95% confidence interval for \\(\\mu\\) (unknown \\(\\sigma\\)) is typically \\(\\bar{x}\\pm t_{0.975,\\,n-1}\\cdot s/\\sqrt{n}\\) (normal \\(z\\) is an approximation for large \\(n\\)). Interpretation: if we repeated the sampling process many times, 95% of such intervals would contain the true \\(\\mu\\)."
+        ];
+        const intros = [
+          "How to use: choose the favorable outcome, then toss 1 or N and watch the estimate update.",
+          "How to use: classify each variable as discrete or continuous and check your choices.",
+          "How to use: roll the die, adjust x, and compare \\(p(x)\\), \\(F(x)\\), and \\(1-F(x)\\).",
+          "How to use: sample heights, move the slider, and compare shaded area to the CDF value.",
+          "How to use: draw samples and compare the PDF curve to the CDF values.",
+          "How to use: adjust \\(\\mu\\) and \\(\\sigma\\) and compare theoretical vs sample moments.",
+          "How to use: resample to see how \\(\\bar{x}\\) varies as you change sample size.",
+          "How to use: simulate samples and compare confidence intervals across runs."
+        ];
+
+        function stripInteractivePrefix(text) {
+          const trimmed = text.trim();
+          const lower = trimmed.toLowerCase();
+          const prefix = "interactive";
+          if (lower.indexOf(prefix) === 0) {
+            return trimmed.slice(prefix.length).trim();
+          }
+          return trimmed;
+        }
+
+        function stripLeadingNumbering(text) {
+          let s = text.trim();
+          let changed = true;
+          while (changed) {
+            changed = false;
+            let i = 0;
+            while (i < s.length && s[i] >= "0" && s[i] <= "9") i += 1;
+            if (i === 0) break;
+            while (i < s.length && (s[i] === " " || s[i] === "\t")) i += 1;
+            while (i < s.length && (s[i] === "." || s[i] === "-" || s[i] === ":")) {
+              i += 1;
+              while (i < s.length && (s[i] === " " || s[i] === "\t")) i += 1;
+            }
+            s = s.slice(i).trim();
+            changed = true;
+          }
+          while (
+            s.length &&
+            (s[0] === "." || s[0] === "-" || s[0] === ":" || s[0] === " " || s[0] === "\t")
+          ) {
+            s = s.slice(1).trim();
+          }
+          return s;
+        }
+
+        const cards = Array.from(list.querySelectorAll(".topic-card"));
+        cards.forEach((card, i) => {
+          const title = card.querySelector("h4");
+          if (!title) return;
+          const originalTitle = title.textContent.trim();
+          let displayNumber = "";
+          for (let k = 0; k < originalTitle.length; k += 1) {
+            const ch = originalTitle[k];
+            if (ch >= "0" && ch <= "9") displayNumber += ch;
+            else if (!displayNumber && (ch === " " || ch === "\t")) continue;
+            else break;
+          }
+          if (!displayNumber) displayNumber = String(i + 1);
+          let cleanTitle = stripInteractivePrefix(originalTitle);
+          cleanTitle = stripLeadingNumbering(cleanTitle);
+          title.textContent = `${displayNumber}. ${cleanTitle}`;
+          card.dataset.cardNumber = displayNumber;
+          card.dataset.cardTitle = cleanTitle;
+
+          const content = Array.from(card.children).filter((el) => el !== title);
+          const grid = document.createElement("div");
+          grid.className = "card-grid";
+          const left = document.createElement("div");
+          left.className = "card-left";
+          const right = document.createElement("div");
+          right.className = "card-right";
+          const theoryEl = document.createElement("div");
+          theoryEl.className = "theory";
+          theoryEl.innerHTML = theory[i] || "";
+          const introEl = document.createElement("p");
+          introEl.className = "exercise-intro";
+          introEl.innerHTML = intros[i] || "";
+
+          left.appendChild(title);
+          left.appendChild(theoryEl);
+          right.appendChild(introEl);
+          content.forEach((el) => right.appendChild(el));
+          grid.appendChild(left);
+          grid.appendChild(right);
+          card.innerHTML = "";
+          card.appendChild(grid);
+        });
+        typesetMath(list);
+      }
+
+      function normalSample(mu, sigma) {
+        const u1 = Math.random();
+        const u2 = Math.random();
+        const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+        return mu + sigma * z;
+      }
+
+      function erf(x) {
+        const sign = x >= 0 ? 1 : -1;
+        const absX = Math.abs(x);
+        const a1 = 0.254829592;
+        const a2 = -0.284496736;
+        const a3 = 1.421413741;
+        const a4 = -1.453152027;
+        const a5 = 1.061405429;
+        const p = 0.3275911;
+        const t = 1 / (1 + p * absX);
+        const y =
+          1 -
+          (((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t) *
+            Math.exp(-absX * absX);
+        return sign * y;
+      }
+
+      function normalPDF(x, mu, sigma) {
+        const z = (x - mu) / sigma;
+        return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * z * z);
+      }
+
+      function normalCDF(x, mu, sigma) {
+        const z = (x - mu) / (sigma * Math.sqrt(2));
+        return 0.5 * (1 + erf(z));
+      }
+
+      function setupCoinToss() {
+        const choice = byId("coin-choice");
+        const stepsInput = byId("coin-steps");
+        const stepBtn = byId("coin-step");
+        const batchBtn = byId("coin-batch");
+        const resetBtn = byId("coin-reset");
+        const favOut = byId("coin-fav");
+        const totalOut = byId("coin-total");
+        const probOut = byId("coin-prob");
+        const canvas = byId("coin-chart");
+        const ctx = canvas.getContext("2d");
+        const outcomes = [];
+
+        function toss(times) {
+          for (let i = 0; i < times; i += 1) {
+            outcomes.push(Math.random() < 0.5);
+          }
+        }
+
+        function computeSeries() {
+          const favorHeads = choice.value === "heads";
+          let fav = 0;
+          const series = [];
+          outcomes.forEach((isHead, idx) => {
+            if ((isHead && favorHeads) || (!isHead && !favorHeads)) {
+              fav += 1;
+            }
+            series.push(fav / (idx + 1));
+          });
+          return { fav, series };
+        }
+
+        function drawChart(series) {
+          const padding = 30;
+          const w = canvas.width;
+          const h = canvas.height;
+          ctx.clearRect(0, 0, w, h);
+          drawAxes(ctx, w, h, padding);
+
+          ctx.strokeStyle = "#94a3b8";
+          ctx.setLineDash([5, 4]);
+          ctx.beginPath();
+          ctx.moveTo(padding, h - padding - (h - 2 * padding) * 0.5);
+          ctx.lineTo(w - padding, h - padding - (h - 2 * padding) * 0.5);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          if (!series.length) return;
+          const scaleX = (i) =>
+            padding + (i / Math.max(series.length - 1, 1)) * (w - 2 * padding);
+          const scaleY = (p) => h - padding - p * (h - 2 * padding);
+
+          ctx.strokeStyle = "#2563eb";
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          series.forEach((p, i) => {
+            const x = scaleX(i);
+            const y = scaleY(p);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          });
+          ctx.stroke();
+        }
+
+        function update() {
+          const total = outcomes.length;
+          const { fav, series } = computeSeries();
+          favOut.textContent = fav;
+          totalOut.textContent = total;
+          probOut.textContent = total ? fmt(fav / total, 3) : "-";
+          drawChart(series);
+        }
+
+        stepBtn.addEventListener("click", () => {
+          toss(1);
+          update();
+        });
+        batchBtn.addEventListener("click", () => {
+          const steps = Math.max(1, Number(stepsInput.value) || 1);
+          toss(steps);
+          update();
+        });
+        resetBtn.addEventListener("click", () => {
+          outcomes.length = 0;
+          update();
+        });
+        choice.addEventListener("change", update);
+
+        update();
+      }
+
+      function setupVariableTypeExercise() {
+        const selects = Array.from(document.querySelectorAll(".var-select"));
+        const checkBtn = byId("var-check");
+        const feedback = byId("var-feedback");
+
+        checkBtn.addEventListener("click", () => {
+          const unanswered = selects.filter((sel) => !sel.value).length;
+          if (unanswered) {
+            feedback.textContent = "Select a type for every variable.";
+            feedback.className = "feedback";
+            return;
+          }
+          const correct = selects.filter((sel) => sel.value === sel.dataset.answer).length;
+          feedback.textContent = `${correct} / ${selects.length} correct.`;
+          feedback.className = correct === selects.length ? "feedback correct" : "feedback wrong";
+        });
+      }
+
+      function setupDiceSimulation() {
+        const xInput = byId("dice-x");
+        const xLabel = byId("dice-x-label");
+        const stepsInput = byId("dice-steps");
+        const rollOneBtn = byId("dice-roll-one");
+        const rollNBtn = byId("dice-roll-n");
+        const resetBtn = byId("dice-reset");
+        const totalOut = byId("dice-total");
+        const pxOut = byId("dice-px");
+        const cdfOut = byId("dice-cdf");
+        const ccdfOut = byId("dice-ccdf");
+        const canvas = byId("dice-canvas");
+        const ctx = canvas.getContext("2d");
+        const counts = [0, 0, 0, 0, 0, 0];
+        let total = 0;
+
+        function roll(times) {
+          for (let i = 0; i < times; i += 1) {
+            const face = Math.floor(Math.random() * 6);
+            counts[face] += 1;
+            total += 1;
+          }
+        }
+
+        function drawBars(selected) {
+          const padding = 30;
+          const w = canvas.width;
+          const h = canvas.height;
+          ctx.clearRect(0, 0, w, h);
+          drawAxes(ctx, w, h, padding);
+
+          const barWidth = (w - 2 * padding) / 6;
+          for (let i = 0; i < 6; i += 1) {
+            const prob = total ? counts[i] / total : 0;
+            const barHeight = prob * (h - 2 * padding) * 0.9;
+            const x = padding + i * barWidth;
+            const y = h - padding - barHeight;
+            ctx.fillStyle = i + 1 === selected ? "#2563eb" : "#93c5fd";
+            ctx.fillRect(x + 6, y, barWidth - 12, barHeight);
+            ctx.fillStyle = "#0f172a";
+            ctx.font = "12px system-ui, sans-serif";
+            ctx.fillText(String(i + 1), x + barWidth / 2 - 3, h - padding + 16);
+          }
+        }
+
+        function update() {
+          const xVal = Number(xInput.value);
+          xLabel.textContent = xVal;
+          totalOut.textContent = total;
+          if (!total) {
+            pxOut.textContent = "-";
+            cdfOut.textContent = "-";
+            ccdfOut.textContent = "-";
+          } else {
+            const px = counts[xVal - 1] / total;
+            const cdf = counts.slice(0, xVal).reduce((s, v) => s + v, 0) / total;
+            const ccdf = counts.slice(xVal - 1).reduce((s, v) => s + v, 0) / total;
+            pxOut.textContent = fmt(px, 3);
+            cdfOut.textContent = fmt(cdf, 3);
+            ccdfOut.textContent = fmt(ccdf, 3);
+          }
+          drawBars(xVal);
+        }
+
+        rollOneBtn.addEventListener("click", () => {
+          roll(1);
+          update();
+        });
+        rollNBtn.addEventListener("click", () => {
+          const steps = Math.max(1, Number(stepsInput.value) || 1);
+          roll(steps);
+          update();
+        });
+        resetBtn.addEventListener("click", () => {
+          counts.fill(0);
+          total = 0;
+          update();
+        });
+        xInput.addEventListener("input", update);
+
+        update();
+      }
+
+      function setupHeightDistribution() {
+        const xInput = byId("height-x");
+        const xLabel = byId("height-x-label");
+        const cdfOut = byId("height-cdf");
+        const ccdfOut = byId("height-ccdf");
+        const canvas = byId("height-canvas");
+        const ctx = canvas.getContext("2d");
+        const mu = 170;
+        const sigma = 10;
+
+        function draw() {
+          const xVal = Number(xInput.value);
+          xLabel.textContent = xVal;
+          const padding = 30;
+          const w = canvas.width;
+          const h = canvas.height;
+          const minX = mu - 4 * sigma;
+          const maxX = mu + 4 * sigma;
+          const maxPdf = normalPDF(mu, mu, sigma);
+          const scaleX = (x) => padding + ((x - minX) / (maxX - minX)) * (w - 2 * padding);
+          const scaleY = (y) => h - padding - (y / maxPdf) * (h - 2 * padding) * 0.9;
+
+          ctx.clearRect(0, 0, w, h);
+          drawAxes(ctx, w, h, padding);
+
+          ctx.fillStyle = "rgba(59, 130, 246, 0.2)";
+          ctx.beginPath();
+          ctx.moveTo(scaleX(minX), h - padding);
+          for (let i = 0; i <= 120; i += 1) {
+            const x = minX + (i / 120) * (maxX - minX);
+            if (x > xVal) break;
+            const y = normalPDF(x, mu, sigma);
+            ctx.lineTo(scaleX(x), scaleY(y));
+          }
+          ctx.lineTo(scaleX(xVal), h - padding);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.strokeStyle = "#2563eb";
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          for (let i = 0; i <= 120; i += 1) {
+            const x = minX + (i / 120) * (maxX - minX);
+            const y = normalPDF(x, mu, sigma);
+            if (i === 0) ctx.moveTo(scaleX(x), scaleY(y));
+            else ctx.lineTo(scaleX(x), scaleY(y));
+          }
+          ctx.stroke();
+
+          ctx.strokeStyle = "#0f172a";
+          ctx.beginPath();
+          ctx.moveTo(scaleX(xVal), padding);
+          ctx.lineTo(scaleX(xVal), h - padding);
+          ctx.stroke();
+
+          const cdf = normalCDF(xVal, mu, sigma);
+          cdfOut.textContent = fmt(cdf, 3);
+          ccdfOut.textContent = fmt(1 - cdf, 3);
+        }
+
+        xInput.addEventListener("input", draw);
+        draw();
+      }
+
+      function setupNormalSamplingViz() {
+        const nInput = byId("sample-n");
+        const muInput = byId("sample-mu");
+        const sdInput = byId("sample-sd");
+        const runBtn = byId("sample-run");
+        const histCanvas = byId("sample-hist");
+        const cdfCanvas = byId("sample-cdf");
+        const meanOut = byId("sample-mean");
+        const sdOut = byId("sample-sd-out");
+        const ctxHist = histCanvas.getContext("2d");
+        const ctxCdf = cdfCanvas.getContext("2d");
+
+        function simulate() {
+          const n = Number(nInput.value);
+          const mu = Number(muInput.value);
+          const sigma = Number(sdInput.value);
+          const data = Array.from({ length: n }, () => normalSample(mu, sigma));
+          const mean = data.reduce((s, v) => s + v, 0) / n;
+          const variance = data.reduce((s, v) => s + (v - mean) ** 2, 0) / (n - 1);
+          const sd = Math.sqrt(variance);
+          meanOut.textContent = fmt(mean, 2);
+          sdOut.textContent = fmt(sd, 2);
+
+          const padding = 30;
+          const bins = 18;
+          const minX = mu - 4 * sigma;
+          const maxX = mu + 4 * sigma;
+          const counts = Array.from({ length: bins }, () => 0);
+          data.forEach((v) => {
+            const idx = Math.min(
+              bins - 1,
+              Math.max(0, Math.floor(((v - minX) / (maxX - minX)) * bins))
+            );
+            counts[idx] += 1;
+          });
+          const maxCount = Math.max(...counts, 1);
+
+          ctxHist.clearRect(0, 0, histCanvas.width, histCanvas.height);
+          drawAxes(ctxHist, histCanvas.width, histCanvas.height, padding);
+
+          const barWidth = (histCanvas.width - 2 * padding) / bins;
+          counts.forEach((count, i) => {
+            const barHeight =
+              (count / maxCount) * (histCanvas.height - 2 * padding) * 0.9;
+            const x = padding + i * barWidth;
+            const y = histCanvas.height - padding - barHeight;
+            ctxHist.fillStyle = "#60a5fa";
+            ctxHist.fillRect(x + 2, y, barWidth - 4, barHeight);
+          });
+
+          const sorted = [...data].sort((a, b) => a - b);
+          ctxCdf.clearRect(0, 0, cdfCanvas.width, cdfCanvas.height);
+          drawAxes(ctxCdf, cdfCanvas.width, cdfCanvas.height, padding);
+
+          ctxCdf.strokeStyle = "#f97316";
+          ctxCdf.lineWidth = 2;
+          ctxCdf.beginPath();
+          sorted.forEach((v, i) => {
+            const x = padding + ((v - minX) / (maxX - minX)) * (cdfCanvas.width - 2 * padding);
+            const y =
+              cdfCanvas.height -
+              padding -
+              ((i + 1) / sorted.length) * (cdfCanvas.height - 2 * padding);
+            if (i === 0) ctxCdf.moveTo(x, y);
+            else ctxCdf.lineTo(x, y);
+          });
+          ctxCdf.stroke();
+        }
+
+        nInput.addEventListener("input", simulate);
+        muInput.addEventListener("input", simulate);
+        sdInput.addEventListener("input", simulate);
+        runBtn.addEventListener("click", simulate);
+        simulate();
+      }
+
+      function setupMeanVarianceViz() {
+        const meanInput = byId("mv-mean");
+        const varInput = byId("mv-var");
+        const modeInput = byId("mv-mode");
+        const meanLabel = byId("mv-mean-label");
+        const varLabel = byId("mv-var-label");
+        const sdLabel = byId("mv-sd-label");
+        const canvas = byId("mv-canvas");
+        const ctx = canvas.getContext("2d");
+
+        function draw() {
+          const mu = Number(meanInput.value);
+          const variance = Number(varInput.value);
+          const sigma = Math.sqrt(variance);
+          meanLabel.textContent = fmt(mu, 1);
+          varLabel.textContent = fmt(variance, 1);
+          sdLabel.textContent = fmt(sigma, 2);
+
+          const padding = 30;
+          const w = canvas.width;
+          const h = canvas.height;
+          const minX = -10;
+          const maxX = 10;
+          ctx.clearRect(0, 0, w, h);
+          drawAxes(ctx, w, h, padding);
+
+          if (modeInput.value === "continuous") {
+            const maxPdf = normalPDF(mu, mu, sigma);
+            const scaleX = (x) => padding + ((x - minX) / (maxX - minX)) * (w - 2 * padding);
+            const scaleY = (y) => h - padding - (y / maxPdf) * (h - 2 * padding) * 0.9;
+            ctx.strokeStyle = "#2563eb";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            for (let i = 0; i <= 120; i += 1) {
+              const x = minX + (i / 120) * (maxX - minX);
+              const y = normalPDF(x, mu, sigma);
+              if (i === 0) ctx.moveTo(scaleX(x), scaleY(y));
+              else ctx.lineTo(scaleX(x), scaleY(y));
+            }
+            ctx.stroke();
+          } else {
+            const minK = Math.floor(minX);
+            const maxK = Math.ceil(maxX);
+            const ks = [];
+            for (let k = minK; k <= maxK; k += 1) ks.push(k);
+            const raw = ks.map((k) => normalPDF(k, mu, sigma));
+            const sum = raw.reduce((s, v) => s + v, 0);
+            const probs = raw.map((v) => v / sum);
+            const maxProb = Math.max(...probs, 1e-6);
+            const barWidth = (w - 2 * padding) / ks.length;
+            probs.forEach((p, i) => {
+              const barHeight = (p / maxProb) * (h - 2 * padding) * 0.85;
+              const x = padding + i * barWidth;
+              const y = h - padding - barHeight;
+              ctx.fillStyle = "#60a5fa";
+              ctx.fillRect(x + 2, y, barWidth - 4, barHeight);
+            });
+          }
+        }
+
+        meanInput.addEventListener("input", draw);
+        varInput.addEventListener("input", draw);
+        modeInput.addEventListener("change", draw);
+        modeInput.addEventListener("input", draw);
+        draw();
+      }
+
+      function setupConfidenceSim() {
+        const nInput = byId("ci-n");
+        const sdInput = byId("ci-sd");
+        const muInput = byId("ci-mu");
+        const nLabel = byId("ci-n-label");
+        const sdLabel = byId("ci-sd-label");
+        const runBtn = byId("ci-run");
+        const meanOut = byId("ci-mean");
+        const rangeOut = byId("ci-range");
+        const hitOut = byId("ci-hit");
+        const canvas = byId("ci-canvas");
+        const ctx = canvas.getContext("2d");
+
+        function updateLabels() {
+          nLabel.textContent = nInput.value;
+          sdLabel.textContent = fmt(sdInput.value, 1);
+        }
+
+        function drawCI(muTrue, mean, low, high) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          const padding = 40;
+          const minX = muTrue - 4 * Number(sdInput.value);
+          const maxX = muTrue + 4 * Number(sdInput.value);
+          const scale = (x) =>
+            padding + ((x - minX) / (maxX - minX)) * (canvas.width - 2 * padding);
+
+          drawAxes(ctx, canvas.width, canvas.height, padding);
+
+          ctx.strokeStyle = "#f59e0b";
+          ctx.beginPath();
+          ctx.moveTo(scale(muTrue), canvas.height / 2 - 30);
+          ctx.lineTo(scale(muTrue), canvas.height / 2 + 30);
+          ctx.stroke();
+
+          ctx.strokeStyle = "#2b6de9";
+          ctx.lineWidth = 4;
+          ctx.beginPath();
+          ctx.moveTo(scale(low), canvas.height / 2);
+          ctx.lineTo(scale(high), canvas.height / 2);
+          ctx.stroke();
+
+          ctx.fillStyle = "#1c1f24";
+          ctx.beginPath();
+          ctx.arc(scale(mean), canvas.height / 2, 6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        function simulate() {
+          const n = Number(nInput.value);
+          const sigma = Number(sdInput.value);
+          const muTrue = Number(muInput.value);
+          const data = Array.from({ length: n }, () => normalSample(muTrue, sigma));
+          const mean = data.reduce((sum, v) => sum + v, 0) / n;
+          const variance = data.reduce((sum, v) => sum + (v - mean) ** 2, 0) / (n - 1);
+          const se = Math.sqrt(variance / n);
+          const z = 1.96;
+          const low = mean - z * se;
+          const high = mean + z * se;
+
+          meanOut.textContent = fmt(mean, 2);
+          rangeOut.textContent = `${fmt(low, 2)} to ${fmt(high, 2)}`;
+          hitOut.textContent = muTrue >= low && muTrue <= high ? "Yes" : "No";
+          drawCI(muTrue, mean, low, high);
+        }
+
+        nInput.addEventListener("input", updateLabels);
+        sdInput.addEventListener("input", updateLabels);
+        runBtn.addEventListener("click", simulate);
+
+        updateLabels();
+        simulate();
+      }
+
+      function setupQuizzes() {
+        document.querySelectorAll(".quiz").forEach((quiz) => {
+          const correct = quiz.dataset.answer;
+          const button = quiz.querySelector(".check-btn");
+          const feedback = quiz.querySelector(".feedback");
+
+          button.addEventListener("click", () => {
+            const selected = quiz.querySelector("input:checked");
+            if (!selected) {
+              feedback.textContent = "Select an answer first.";
+              feedback.className = "feedback";
+              return;
+            }
+            if (selected.value === correct) {
+              feedback.textContent = "Correct. Nice work.";
+              feedback.className = "feedback correct";
+            } else {
+              feedback.textContent = "Not quite. Review the concept and try again.";
+              feedback.className = "feedback wrong";
+            }
+          });
+        });
+      }
+
+      function setupSamplingDistribution() {
+        const nInput = byId("mean-n");
+        const muInput = byId("mean-mu");
+        const sdInput = byId("mean-sd");
+        const nLabel = byId("mean-n-label");
+        const runBtn = byId("mean-run");
+        const meanOut = byId("mean-of-means");
+        const sdOut = byId("mean-sd-means");
+        const seOut = byId("mean-se");
+        const theoryOut = byId("mean-theory");
+        const canvas = byId("mean-canvas");
+        const ctx = canvas.getContext("2d");
+
+        function updateLabels() {
+          nLabel.textContent = nInput.value;
+        }
+
+        function simulate() {
+          updateLabels();
+          const n = Number(nInput.value);
+          const mu = Number(muInput.value);
+          const sigma = Number(sdInput.value);
+          const data = Array.from({ length: n }, () => normalSample(mu, sigma));
+          const mean = data.reduce((s, v) => s + v, 0) / n;
+          const variance = data.reduce((s, v) => s + (v - mean) ** 2, 0) / (n - 1);
+          const sd = Math.sqrt(variance);
+
+          meanOut.textContent = fmt(mean, 2);
+          sdOut.textContent = fmt(sd, 2);
+          seOut.textContent = `${fmt(mean - sd, 2)} to ${fmt(mean + sd, 2)}`;
+          theoryOut.textContent = fmt(mu, 2);
+
+          const padding = 30;
+          const w = canvas.width;
+          const h = canvas.height;
+          const plotH = h - 2 * padding;
+          const plotW = w - 2 * padding;
+          const minX = mu - 4 * sigma;
+          const maxX = mu + 4 * sigma;
+          const bins = 18;
+          const counts = Array.from({ length: bins }, () => 0);
+          data.forEach((val) => {
+            const idx = Math.min(
+              bins - 1,
+              Math.max(0, Math.floor(((val - minX) / (maxX - minX)) * bins))
+            );
+            counts[idx] += 1;
+          });
+          const maxCount = Math.max(...counts, 1);
+
+          ctx.clearRect(0, 0, w, h);
+          drawAxes(ctx, w, h, padding);
+
+          const barWidth = plotW / bins;
+          counts.forEach((count, i) => {
+            const barHeight = (count / maxCount) * plotH * 0.9;
+            const x = padding + i * barWidth;
+            const y = h - padding - barHeight;
+            ctx.fillStyle = "#60a5fa";
+            ctx.fillRect(x + 1, y, barWidth - 2, barHeight);
+          });
+
+          const scaleX = (x) => padding + ((x - minX) / (maxX - minX)) * plotW;
+          ctx.strokeStyle = "#0f172a";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(scaleX(mean), padding);
+          ctx.lineTo(scaleX(mean), h - padding);
+          ctx.stroke();
+
+          ctx.strokeStyle = "#10b981";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(scaleX(mu), padding);
+          ctx.lineTo(scaleX(mu), h - padding);
+          ctx.stroke();
+
+          ctx.setLineDash([5, 4]);
+          ctx.strokeStyle = "#f97316";
+          ctx.beginPath();
+          ctx.moveTo(scaleX(mean - sd), padding);
+          ctx.lineTo(scaleX(mean - sd), h - padding);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(scaleX(mean + sd), padding);
+          ctx.lineTo(scaleX(mean + sd), h - padding);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.fillStyle = "#0f172a";
+          ctx.font = "12px system-ui, sans-serif";
+          ctx.fillText("Sample histogram", padding + 8, padding + 12);
+        }
+
+        nInput.addEventListener("input", simulate);
+        muInput.addEventListener("input", simulate);
+        sdInput.addEventListener("input", simulate);
+        runBtn.addEventListener("click", simulate);
+        simulate();
+      }
+
+      function setupMiniChecks() {
+        document.querySelectorAll(".mini-check").forEach((check) => {
+          const correct = check.dataset.answer;
+          const button = check.querySelector(".check-btn");
+          const select = check.querySelector("select");
+          const feedback = check.querySelector(".feedback");
+
+          button.addEventListener("click", () => {
+            if (!select.value) {
+              feedback.textContent = "Select an option first.";
+              feedback.className = "feedback";
+              return;
+            }
+            if (select.value === correct) {
+              feedback.textContent = "Correct.";
+              feedback.className = "feedback correct";
+            } else {
+              feedback.textContent = "Not quite. Try again.";
+              feedback.className = "feedback wrong";
+            }
+          });
+        });
+      }
+
+      async function setupWebRBench() {
+        const output = byId("r-output");
+        const runBtn = byId("r-run");
+        const resetBtn = byId("r-reset");
+        const buildBtn = byId("r-build");
+        const codeArea = byId("r-code");
+        const canvas = byId("r-plot");
+        const ctx = canvas.getContext("2d");
+
+        const nInput = byId("r-n");
+        const muAInput = byId("r-mu-a");
+        const muBInput = byId("r-mu-b");
+        const sdInput = byId("r-sd");
+
+        const defaultParams = {
+          n: 60,
+          muA: 8,
+          muB: 6,
+          sigma: 2
+        };
+
+        function buildCode() {
+          const n = Number(nInput.value);
+          const muA = Number(muAInput.value);
+          const muB = Number(muBInput.value);
+          const sigma = Number(sdInput.value);
+          return `set.seed(42)
+n <- ${n}
+mu_a <- ${muA}
+mu_b <- ${muB}
+sigma <- ${sigma}
+
+group <- rep(c("before", "after"), each = n)
+y <- c(rnorm(n, mu_a, sigma), rnorm(n, mu_b, sigma))
+df <- data.frame(group = group, y = y)
+
+cat("Summary by group\\n")
+print(aggregate(y ~ group, df, mean))
+print(aggregate(y ~ group, df, sd))
+
+ci_before <- t.test(df$y[df$group == "before"])$conf.int
+ci_after <- t.test(df$y[df$group == "after"])$conf.int
+cat("\\n95% CI (before):", round(ci_before, 2), "\\n")
+cat("95% CI (after):", round(ci_after, 2), "\\n")
+
+par(mfrow = c(1, 2))
+hist(df$y[df$group == "before"],
+     main = "Before chatbot",
+     xlab = "Response time (min)",
+     col = "#93c5fd", border = "white")
+hist(df$y[df$group == "after"],
+     main = "After chatbot",
+     xlab = "Response time (min)",
+     col = "#fda4af", border = "white")`;
+        }
+
+        function reset() {
+          nInput.value = defaultParams.n;
+          muAInput.value = defaultParams.muA;
+          muBInput.value = defaultParams.muB;
+          sdInput.value = defaultParams.sigma;
+          codeArea.value = buildCode();
+        }
+
+        function clearOutput() {
+          output.textContent = "";
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        let webRConsole = null;
+        try {
+          const { Console } = await import("https://webr.r-wasm.org/latest/webr.mjs");
+          webRConsole = new Console({
+            stdout: (line) => {
+              output.textContent += `${line}\n`;
+            },
+            stderr: (line) => {
+              output.textContent += `${line}\n`;
+            },
+            prompt: (line) => {
+              output.textContent += line;
+            },
+            canvasImage: (img) => {
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            },
+            canvasNewPage: () => {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+          });
+          await webRConsole.run();
+          await webRConsole.stdin("options(device=webr::canvas(450, 260))");
+          output.textContent = "webR is ready. Update parameters and run the code.";
+          runBtn.disabled = false;
+        } catch (err) {
+          output.textContent = `webR failed to load: ${err.message}`;
+        }
+
+        buildBtn.addEventListener("click", () => {
+          codeArea.value = buildCode();
+        });
+
+        resetBtn.addEventListener("click", () => {
+          reset();
+          clearOutput();
+          output.textContent = "Reset to defaults. Click Run R to execute.";
+        });
+
+        runBtn.addEventListener("click", async () => {
+          if (!webRConsole) return;
+          clearOutput();
+          await webRConsole.stdin(codeArea.value);
+        });
+
+        reset();
+      }
+
+      reorderSections();
+      setupTheoryCards();
+      setupViewSettings();
+      setupCoinToss();
+      setupVariableTypeExercise();
+      setupDiceSimulation();
+      setupHeightDistribution();
+      setupNormalSamplingViz();
+      setupMeanVarianceViz();
+      setupSamplingDistribution();
+      setupConfidenceSim();
+      setupQuizzes();
+      setupMiniChecks();
+      setupWebRBench();
+    </script>
+  </body>
+  </html>
